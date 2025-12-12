@@ -11,6 +11,7 @@ import Teachers from "./features/teachers/page"
 import ClassRooms from "./features/classrooms/page"
 import AddStudents from "./features/students/add/page"
 import BulkUploadStudents from "./features/students/bulk-upload/page"
+import AddTeachers from "./features/teachers/add/page"
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
 
             {/* teachers */}
             <Route path="/teachers" element={<Teachers />} />
+            <Route path="/teachers/add-teachers" element={<AddTeachers />} />
           </Routes>
         </main>
       </SidebarProvider>
