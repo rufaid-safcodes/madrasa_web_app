@@ -9,6 +9,8 @@ import Staffs from "./features/staff/page"
 import Students from "./features/students/page"
 import Teachers from "./features/teachers/page"
 import ClassRooms from "./features/classrooms/page"
+import AddStudents from "./features/students/add/page"
+import BulkUploadStudents from "./features/students/bulk-upload/page"
 
 function App() {
   return (
@@ -29,7 +31,13 @@ function App() {
             <Route path="/payments-and-fees" element={<Payments />} />
             <Route path="/staffs" element={<Staffs />} />
             <Route path="/class-rooms" element={<ClassRooms />} />
+
+            {/* students */}
             <Route path="/students" element={<Students />} />
+            <Route path="/students/add-students" element={<AddStudents />} />
+            <Route path="/students/students-bulk-upload" element={<BulkUploadStudents />} />
+
+            {/* teachers */}
             <Route path="/teachers" element={<Teachers />} />
           </Routes>
         </main>
