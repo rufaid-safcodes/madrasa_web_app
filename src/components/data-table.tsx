@@ -137,14 +137,34 @@ export function DataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
+                  <TableCell>
+                    <div className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        checked={row.getIsSelected()}
+                        onChange={row.getToggleSelectedHandler()}
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                      />
+                      {row.getVisibleCells().find(cell => cell.column.id === 'name') ? (
+                        <span>
+                          {flexRender(
+                            row.getVisibleCells().find(cell => cell.column.id === 'name')!.column.columnDef.cell,
+                            row.getVisibleCells().find(cell => cell.column.id === 'name')!.getContext()
+                          )}
+                        </span>
+                      ) : null}
+                    </div>
+                  </TableCell>
+                  {row.getVisibleCells()
+                    .filter(cell => cell.column.id !== 'name')
+                    .map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
