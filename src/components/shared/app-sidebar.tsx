@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Calendar, Home, Search, Settings, Users, Users2, Users2Icon, ChevronDown } from "lucide-react"
 import { NavLink } from "react-router-dom"
 import {
@@ -9,7 +10,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from "@/components/ui/sidebar"
 
 // Menu items
@@ -48,11 +48,19 @@ const items = [
     title: "Teachers",
     url: "/teachers",
     icon: Users,
+    list: [
+      { name: "Manage Teachers", url: "/teachers" },
+      { name: "Add Teacher", url: "/teachers/add-teachers" },
+      { name: "Departments", url: "/teachers/departments" },
+    ]
   },
   {
     title: "Staffs",
     url: "/staffs",
     icon: Users2Icon,
+    list: [
+      { name: "Manage Accounts Staff", url: "/staffs/accounts" }
+    ]
   },
   {
     title: "Settings",
@@ -60,8 +68,6 @@ const items = [
     icon: Settings,
   },
 ]
-
-import React, { useState } from "react";
 
 export function AppSidebar() {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
@@ -78,10 +84,10 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Madrass Management</SidebarGroupLabel>
-          <div>
+          <SidebarGroupLabel>Madrassa Management</SidebarGroupLabel>
+          {/* <div>
             <SidebarTrigger />
-          </div>
+          </div> */}
           <SidebarGroupContent className="p-3">
             <SidebarMenu className=" flex flex-col gap-2">
               {items.map((item) => (

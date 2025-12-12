@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { SidebarProvider } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/shared/app-sidebar"
 
 import Dashboard from "@/features/dashboard/page"  
@@ -21,6 +21,7 @@ function App() {
             <Link to="/" className="text-blue-600 hover:underline">Home</Link>
             <Link to="/about" className="text-blue-600 hover:underline">About</Link>
           </nav> */}
+          <SidebarTrigger />
 
           <Routes>
             <Route path="/" element={<Dashboard />} />
