@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/shared/app-sidebar"
+import { Toaster } from "@/components/ui/toaster"
 
 import Dashboard from "@/features/dashboard/page"  
 import Attendance from "@/features/attendance/page"
@@ -12,6 +13,8 @@ import ClassRooms from "./features/classrooms/page"
 import AddStudents from "./features/students/add/page"
 import BulkUploadStudents from "./features/students/bulk-upload/page"
 import AddTeachers from "./features/teachers/add/page"
+import ViewTeacher from "./features/teachers/view/page"
+import EditTeacher from "./features/teachers/edit/page"
 
 function App() {
   return (
@@ -41,8 +44,11 @@ function App() {
             {/* teachers */}
             <Route path="/teachers" element={<Teachers />} />
             <Route path="/teachers/add-teachers" element={<AddTeachers />} />
+            <Route path="/teachers/edit-teachers/:id" element={<EditTeacher />} />
+            <Route path="/teachers/view-teachers/:id" element={<ViewTeacher />} />
           </Routes>
         </main>
+        <Toaster />
       </SidebarProvider>
     </BrowserRouter>
   )
