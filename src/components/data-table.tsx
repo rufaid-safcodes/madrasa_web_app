@@ -116,16 +116,34 @@ export function DataTable<TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                ))}
+                {/* Select All Checkbox */}
+                <TableHead className="w-12">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      checked={table.getIsAllPageRowsSelected()}
+                      onChange={table.getToggleAllPageRowsSelectedHandler()}
+                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                    />
+                  </div>
+                </TableHead>
+                
+                {/* Dynamic Headers */}
+                {headerGroup.headers
+                  .filter(header => header.id !== 'select' && header.id !== 'actions' && header.column.getIsVisible())
+                  .map((header) => (
+                    <TableHead key={header.id}>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
+                    </TableHead>
+                  ))}
+                
+                {/* Actions Header - Always visible */}
+                <TableHead className="w-12">
+                  Actions
+                </TableHead>
               </TableRow>
             ))}
           </TableHeader>
@@ -133,30 +151,26 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                  {/* Select Checkbox */}
                   <TableCell>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center">
                       <input
                         type="checkbox"
                         checked={row.getIsSelected()}
                         onChange={row.getToggleSelectedHandler()}
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                       />
-                      {row.getVisibleCells().find(cell => cell.column.id === 'name') ? (
-                        <span>
-                          {flexRender(
-                            row.getVisibleCells().find(cell => cell.column.id === 'name')!.column.columnDef.cell,
-                            row.getVisibleCells().find(cell => cell.column.id === 'name')!.getContext()
-                          )}
-                        </span>
-                      ) : null}
                     </div>
                   </TableCell>
+                  
+                  {/* Dynamic Cells - Only show visible columns */}
                   {row.getVisibleCells()
-                    .filter(cell => cell.column.id !== 'name')
+                    .filter(cell => 
+                      cell.column.id !== 'select' && 
+                      cell.column.id !== 'actions' && 
+                      cell.column.getIsVisible()
+                    )
                     .map((cell) => (
                       <TableCell key={cell.id}>
                         {flexRender(
@@ -165,6 +179,8 @@ export function DataTable<TData, TValue>({
                         )}
                       </TableCell>
                     ))}
+                  
+                  {/* Actions Cell - Always visible */}
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
