@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
+import { studentsData } from '@/lib/data';
 
 // Define types
 type Student = {
@@ -67,23 +68,27 @@ type StudentFormValues = z.infer<typeof studentFormSchema>;
 // Mock API functions
 const fetchStudent = async (id: string): Promise<Student> => {
   return new Promise((resolve) => {
-    setTimeout(() => {
-      // In a real app, this would be an API call
-      resolve({
-        id,
-        admission_no: `STU${Math.floor(1000 + Math.random() * 9000)}`,
-        first_name: "John",
-        last_name: "Doe",
-        gender: "male",
-        dob: "2010-01-01",
-        phone: "1234567890",
-        guardian_name: "Jane Doe",
-        address: "123 Main St, City",
-        admission_date: new Date().toISOString().split("T")[0],
-        status: "active",
-        academic_year_id: "1",
-      });
-    }, 0);
+    // Find the student with the matching ID
+    const student = studentsData.find((s) => s.id === id);
+    
+    if (!student) {
+      throw new Error("Student not found");
+    }
+    // Map the student data to match the Student type
+    resolve({
+      id: student.id,
+      admission_no: student.admission_no,
+      first_name: student.first_name,
+      last_name: student.last_name,
+      gender: student.gender as "male" | "female",
+      dob: student.dob,
+      phone: student.phone,
+      guardian_name: student.guardian_name,
+      address: student.address,
+      admission_date: student.admission_date,
+      status: student.status as "active" | "inactive" | "graduated",
+      academic_year_id: student.academic_year_id,
+    });
   });
 };
 

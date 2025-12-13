@@ -15,6 +15,8 @@ import BulkUploadStudents from "./features/students/bulk-upload/page"
 import AddTeachers from "./features/teachers/add/page"
 import ViewTeacher from "./features/teachers/view/page"
 import EditTeacher from "./features/teachers/edit/page"
+import EditStudent from "./features/students/edit/page"
+import ViewStudent from "./features/students/view/page"
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
               {/* students */}
               <Route path="/students" element={<Students />} />
               <Route path="/students/add-students" element={<AddStudents />} />
+              <Route path="/students/edit-students/:id" element={<EditStudent />} />
+              <Route path="/students/view-students/:id" element={<ViewStudent />} />
               <Route path="/students/students-bulk-upload" element={<BulkUploadStudents />} />
 
               {/* teachers */}
