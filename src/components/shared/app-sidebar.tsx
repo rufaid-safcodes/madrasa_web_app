@@ -102,9 +102,13 @@ export function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="bg-[#151529]!">
         <SidebarGroup>
-          <SidebarGroupLabel>Madrassa Management</SidebarGroupLabel>
+          <SidebarGroupLabel className="mb-3">
+            <div>
+              <p className="text-white text-[24px]">LOGO</p>
+            </div>
+          </SidebarGroupLabel>
           {/* <div>
             <SidebarTrigger />
           </div> */}
@@ -118,11 +122,11 @@ export function AppSidebar() {
                         <NavLink
                           to={item.url}
                           end={!item.list}
+                          // style={{ color: "#fff" }}
                           className={({ isActive }) =>
-                            `flex items-center gap-2 rounded-md p-3 transition-colors text-sm font-medium ${
-                              isActive && !item.list
-                                ? "bg-[#fd5d5d] text-white"
-                                : "text-gray-700 hover:bg-gray-100"
+                            `flex items-center gap-2 rounded-md p-3 transition-colors text-sm text-white font-medium ${isActive && !item.list
+                              ? "bg-white text-black!"
+                              : "text-white! hover:bg-white! hover:text-black!"
                             }`
                           }
                         >
@@ -131,11 +135,10 @@ export function AppSidebar() {
                           {item.list && (
                             <ChevronDown
                               onClick={(e) => handleExpand(e, item.title)}
-                              className={`w-4 h-4 transition-transform duration-200 ${
-                                expandedItems.includes(item.title)
-                                  ? "rotate-180"
-                                  : ""
-                              }`}
+                              className={`w-4 h-4 transition-transform duration-200 ${expandedItems.includes(item.title)
+                                ? "rotate-180"
+                                : ""
+                                }`}
                             />
                           )}
                         </NavLink>
@@ -151,10 +154,9 @@ export function AppSidebar() {
                           to={sub.url}
                           end
                           className={({ isActive }) =>
-                            `block px-3 py-2 text-sm rounded-md transition-colors ${
-                              isActive
-                                ? "bg-[#fd5d5d] text-white"
-                                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                            `block px-3 py-2 text-sm rounded-md transition-colors ${isActive
+                              ? "bg-white text-black!"
+                              : "text-white! hover:bg-white! hover:text-black!"
                             }`
                           }
                         >

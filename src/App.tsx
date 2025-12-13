@@ -3,7 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/shared/app-sidebar"
 import { Toaster } from "@/components/ui/toaster"
 
-import Dashboard from "@/features/dashboard/page"  
+import Dashboard from "@/features/dashboard/page"
 import Attendance from "@/features/attendance/page"
 import Payments from "./features/payments/page"
 import Staffs from "./features/staff/page"
@@ -22,13 +22,17 @@ function App() {
       <SidebarProvider>
         <AppSidebar />
 
-        <main className="w-full p-4">
+        <main className="w-full bg-[#f1f1f1]">
           {/* <nav className="flex gap-4">
             <Link to="/" className="text-blue-600 hover:underline">Home</Link>
             <Link to="/about" className="text-blue-600 hover:underline">About</Link>
           </nav> */}
-          <SidebarTrigger />
+          <div className="sticky top-0 bg-white p-[30px_40px] flex items-center gap-5">
 
+            <SidebarTrigger />
+
+            <h1 className="text-[26px] font-medium">Title</h1>
+          </div>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/attendance" element={<Attendance />} />

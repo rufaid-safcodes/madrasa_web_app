@@ -312,6 +312,6 @@ button:focus-visible {
 	}
 }
 .active {
-	background: #fd5d5d!important;
-	color: white!important;
+	background: #fff !important;
+	color: #000 !important;
 }
