@@ -38,13 +38,15 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   filterColumn?: string;
+  entityType?: 'teacher' | 'student' | 'staff';
   onRemove?: (id: string) => Promise<void> | void;
 }
 
 export function DataTable<TData extends { id: string }, TValue>({
   columns,
   data,
-  filterColumn = "email", // default filter on email
+  filterColumn = "email",
+  entityType = 'teacher', // default to 'teacher' for backward compatibility
   onRemove,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -197,20 +199,20 @@ export function DataTable<TData extends { id: string }, TValue>({
                       </DropdownMenuTrigger>
                       <DropdownMenuContent align="end">
                         <DropdownMenuItem 
-                          onClick={() => navigate(`/teachers/view-teachers/${row.original.id}`)}
+                          onClick={() => navigate(`/${entityType}s/view-${entityType}s/${row.original.id}`)}
                         >
                           View details
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          onClick={() => navigate(`/teachers/edit-teachers/${row.original.id}`)}
+                          onClick={() => navigate(`/${entityType}s/edit-${entityType}s/${row.original.id}`)}
                         >
-                          Edit teacher
+                          Edit {entityType}
                         </DropdownMenuItem>
                         <DropdownMenuItem 
                           className="text-red-600 hover:text-white! hover:bg-[#151529]!"
                           onClick={async (e) => {
                             e.stopPropagation();
-                            if (window.confirm('Are you sure you want to remove this teacher?')) {
+                            if (window.confirm(`Are you sure you want to remove this ${entityType}?`)) {
                               try {
                                 if (onRemove) {
                                   await onRemove(row.original.id);

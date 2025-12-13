@@ -17,6 +17,7 @@ export function Teachers() {
           columns={columns}
           data={teachersData}
           filterColumn="email"
+          entityType="teacher"
           onRemove={async (id) => {
             // TODO: Replace with your actual API call
             console.log("Removing teacher with ID:", id);
