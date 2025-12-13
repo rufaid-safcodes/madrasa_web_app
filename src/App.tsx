@@ -33,24 +33,26 @@ function App() {
 
             <h1 className="text-[26px] font-medium">Title</h1>
           </div>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/attendance" element={<Attendance />} />
-            <Route path="/payments-and-fees" element={<Payments />} />
-            <Route path="/staffs" element={<Staffs />} />
-            <Route path="/class-rooms" element={<ClassRooms />} />
+          <div className="p-10!">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/attendance" element={<Attendance />} />
+              <Route path="/payments-and-fees" element={<Payments />} />
+              <Route path="/staffs" element={<Staffs />} />
+              <Route path="/class-rooms" element={<ClassRooms />} />
 
-            {/* students */}
-            <Route path="/students" element={<Students />} />
-            <Route path="/students/add-students" element={<AddStudents />} />
-            <Route path="/students/students-bulk-upload" element={<BulkUploadStudents />} />
+              {/* students */}
+              <Route path="/students" element={<Students />} />
+              <Route path="/students/add-students" element={<AddStudents />} />
+              <Route path="/students/students-bulk-upload" element={<BulkUploadStudents />} />
 
-            {/* teachers */}
-            <Route path="/teachers" element={<Teachers />} />
-            <Route path="/teachers/add-teachers" element={<AddTeachers />} />
-            <Route path="/teachers/edit-teachers/:id" element={<EditTeacher />} />
-            <Route path="/teachers/view-teachers/:id" element={<ViewTeacher />} />
-          </Routes>
+              {/* teachers */}
+              <Route path="/teachers" element={<Teachers />} />
+              <Route path="/teachers/add-teachers" element={<AddTeachers />} />
+              <Route path="/teachers/edit-teachers/:id" element={<EditTeacher />} />
+              <Route path="/teachers/view-teachers/:id" element={<ViewTeacher />} />
+            </Routes>
+          </div>
         </main>
         <Toaster />
       </SidebarProvider>

@@ -3,7 +3,7 @@ import { columns, teachersData } from "@/lib/data";
 
 export function Teachers() {
   return (
-    <div className="w-full p-4">
+    <div className="w-full bg-white p-[20px_30px] rounded-[20px]">
       <div className="mt-4">
         <h1 className="text-2xl font-bold">
           Welcome to Madrasa Web App - Teachers Management

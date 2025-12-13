@@ -28,10 +28,10 @@ type TeacherFormProps = {
 };
 
 // Mock data for users and departments
-const mockUsers = [
-  { id: '1', name: 'John Doe', email: 'john@example.com' },
-  { id: '2', name: 'Jane Smith', email: 'jane@example.com' },
-];
+// const mockUsers = [
+//   { id: '1', name: 'John Doe', email: 'john@example.com' },
+//   { id: '2', name: 'Jane Smith', email: 'jane@example.com' },
+// ];
 
 const mockDepartments = [
   { id: '1', name: 'Computer Science' },
@@ -160,34 +160,24 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
   };
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="min-w-[calc(100vw-1000px)] max-h-[calc(100vh-200px)] overflow-auto">
       <CardHeader>
         <CardTitle>
           {mode === 'ADD' ? 'Add New Teacher' : mode === 'EDIT' ? 'Edit Teacher' : 'Teacher Details'}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-between h-full">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-auto">
             {/* User Select */}
             <div className="space-y-2">
               <Label htmlFor="user_id">Teacher</Label>
-              <Select
+
+              <Input
+                id="qualification"
                 disabled={isViewMode || isLoading}
-                onValueChange={(value) => form.setValue('user_id', value)}
-                value={form.watch('user_id')}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Select teacher" />
-                </SelectTrigger>
-                <SelectContent>
-                  {mockUsers.map((user) => (
-                    <SelectItem key={user.id} value={user.id}>
-                      {user.name} ({user.email})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                {...form.register('user_id')}
+              />
               {form.formState.errors.user_id && (
                 <p className="text-sm text-red-500">{form.formState.errors.user_id.message}</p>
               )}

@@ -2,5 +2,7 @@
 import { TeacherForm } from '../TeacherForm';
 
 export default function AddTeacher() {
-  return <TeacherForm mode="ADD" />;
+  return <div className='flex items-center justify-center w-full'>
+    <TeacherForm mode="ADD" />
+  </div>
 }
