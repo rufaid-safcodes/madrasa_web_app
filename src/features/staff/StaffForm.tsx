@@ -189,7 +189,7 @@ export function StaffForm({ mode, staffId }: StaffFormProps) {
       </CardHeader>
       <CardContent>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-between h-full">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-auto">
+          <div className="space-y-6">
             {/* Name Input */}
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
@@ -198,9 +198,25 @@ export function StaffForm({ mode, staffId }: StaffFormProps) {
                 disabled={isViewMode || isLoading}
                 {...form.register('name')}
                 placeholder="Enter full name"
+                className="w-full"
               />
               {form.formState.errors.name && (
                 <p className="text-sm text-red-500">{form.formState.errors.name.message}</p>
+              )}
+            </div>
+
+            {/* Department */}
+            <div className="space-y-2">
+              <Label htmlFor="department">Department</Label>
+              <Input
+                id="department"
+                disabled={isViewMode || isLoading}
+                {...form.register('department')}
+                placeholder="Enter department"
+                className="w-full"
+              />
+              {form.formState.errors.department && (
+                <p className="text-sm text-red-500">{form.formState.errors.department.message}</p>
               )}
             </div>
 
@@ -225,6 +241,21 @@ export function StaffForm({ mode, staffId }: StaffFormProps) {
               </Select>
               {form.formState.errors.designation && (
                 <p className="text-sm text-red-500">{form.formState.errors.designation.message}</p>
+              )}
+            </div>
+
+            {/* Joining Date */}
+            <div className="space-y-2">
+              <Label htmlFor="joining_date">Joining Date</Label>
+              <Input
+                id="joining_date"
+                type="date"
+                disabled={isViewMode || isLoading}
+                {...form.register('joining_date')}
+                className="w-full"
+              />
+              {form.formState.errors.joining_date && (
+                <p className="text-sm text-red-500">{form.formState.errors.joining_date.message}</p>
               )}
             </div>
 
