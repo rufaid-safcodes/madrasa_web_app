@@ -201,13 +201,12 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 flex flex-col justify-between h-full"
         >
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-auto">
-            {/* User Select */}
+          <div className="space-y-6">
+            {/* Teacher Input */}
             <div className="space-y-2">
               <Label htmlFor="name">Teacher</Label>
-
               <Input
-                id="qualification"
+                id="name"
                 disabled={isViewMode || isLoading}
                 {...form.register("name")}
               />
@@ -229,7 +228,7 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select department" />
                 </SelectTrigger>
-                <SelectContent className="w-full">
+                <SelectContent>
                   {mockDepartments.map((dept) => (
                     <SelectItem key={dept.id} value={dept.id}>
                       {dept.name}
@@ -245,7 +244,7 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
             </div>
 
             {/* Qualification */}
-            <div className="space-y-2 md:col-span-2">
+            <div className="space-y-2">
               <Label htmlFor="qualification">Qualification</Label>
               <Input
                 id="qualification"
@@ -284,15 +283,15 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                   form.setValue("status", value as "active" | "inactive")
                 }
                 value={form.watch("status")}
-                className="flex space-x-4"
+                className="flex flex-col space-y-2"
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="active" id="status-active" />
-                  <Label htmlFor="status-active">Active</Label>
+                  <RadioGroupItem value="active" id="active" />
+                  <Label htmlFor="active">Active</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="inactive" id="status-inactive" />
-                  <Label htmlFor="status-inactive">Inactive</Label>
+                  <RadioGroupItem value="inactive" id="inactive" />
+                  <Label htmlFor="inactive">Inactive</Label>
                 </div>
               </RadioGroup>
               {form.formState.errors.status && (
