@@ -1,16 +1,22 @@
 // src/features/teachers/TeacherForm.tsx
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from "@/components/ui/use-toast"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
 
 // Define types
 type Teacher = {
@@ -19,39 +25,41 @@ type Teacher = {
   department_id: string;
   qualification: string;
   joining_date: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 };
 
 type TeacherFormProps = {
-  mode: 'ADD' | 'EDIT' | 'VIEW';
+  mode: "ADD" | "EDIT" | "VIEW";
   teacherId?: string;
 };
 
 // Import teacher data
-import { teachersData } from '@/lib/data';
+import { teachersData } from "@/lib/data";
 
 // Departments mapping based on teacher data
 const departmentMap: Record<string, { id: string; name: string }> = {};
 
 // Extract unique departments from teachersData
-const uniqueDepartments = Array.from(new Set(teachersData.map(teacher => teacher.department)));
+const uniqueDepartments = Array.from(
+  new Set(teachersData.map((teacher) => teacher.department))
+);
 const mockDepartments = uniqueDepartments.map((dept, index) => ({
   id: String(index + 1),
-  name: dept
+  name: dept,
 }));
 
 // Create a map of department names to their IDs
-mockDepartments.forEach(dept => {
+mockDepartments.forEach((dept) => {
   departmentMap[dept.name] = dept;
 });
 
 // Form validation schema
 const teacherFormSchema = z.object({
-  name: z.string().min(1, 'Please select a teacher'),
-  department_id: z.string().min(1, 'Please select a department'),
-  qualification: z.string().min(1, 'Qualification is required'),
-  joining_date: z.string().min(1, 'Joining date is required'),
-  status: z.enum(['active', 'inactive']),
+  name: z.string().min(1, "Please select a teacher"),
+  department_id: z.string().min(1, "Please select a department"),
+  qualification: z.string().min(1, "Qualification is required"),
+  joining_date: z.string().min(1, "Joining date is required"),
+  status: z.enum(["active", "inactive"]),
 });
 
 type TeacherFormValues = z.infer<typeof teacherFormSchema>;
@@ -60,23 +68,24 @@ type TeacherFormValues = z.infer<typeof teacherFormSchema>;
 const fetchTeacher = async (id: string): Promise<Teacher> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      const teacher = teachersData.find(t => t.id === id);
+      const teacher = teachersData.find((t) => t.id === id);
       if (!teacher) {
-        throw new Error('Teacher not found');
+        throw new Error("Teacher not found");
       }
-      
+
       // Map the teacher data to the form's expected format
-      const departmentId = Object.entries(departmentMap).find(
-        ([_, dept]) => dept.name === teacher.department
-      )?.[1]?.id || '';
-      
+      const departmentId =
+        Object.entries(departmentMap).find(
+          ([_, dept]) => dept.name === teacher.department
+        )?.[1]?.id || "";
+
       resolve({
         id: teacher.id,
         name: teacher.name,
         department_id: departmentId,
-        qualification: teacher.qualification,
+        qualification: teacher.qualification!,
         joining_date: teacher.joining_date,
-        status: teacher.status as 'active' | 'inactive'
+        status: teacher.status as "active" | "inactive",
       });
     }, 0); // Remove artificial delay for local data
   });
@@ -104,23 +113,23 @@ const updateTeacher = async (id: string, data: Teacher): Promise<Teacher> => {
 
 export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
   const navigate = useNavigate();
-  const { toast } = useToast()
-  const [isLoading, setIsLoading] = useState(mode !== 'ADD');
-  const isViewMode = mode === 'VIEW';
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(mode !== "ADD");
+  const isViewMode = mode === "VIEW";
 
   const form = useForm<TeacherFormValues>({
     resolver: zodResolver(teacherFormSchema),
     defaultValues: {
-      name: '',
-      department_id: '',
-      qualification: '',
-      joining_date: '',
-      status: 'active',
+      name: "",
+      department_id: "",
+      qualification: "",
+      joining_date: "",
+      status: "active",
     },
   });
 
   useEffect(() => {
-    if (mode !== 'ADD' && teacherId) {
+    if (mode !== "ADD" && teacherId) {
       const loadTeacher = async () => {
         try {
           const teacher = await fetchTeacher(teacherId);
@@ -132,11 +141,11 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
             status: teacher.status,
           });
         } catch (error) {
-          console.error('Failed to load teacher', error);
+          console.error("Failed to load teacher", error);
           toast({
-            title: 'Error',
-            description: 'Failed to load teacher data',
-            variant: 'destructive',
+            title: "Error",
+            description: "Failed to load teacher data",
+            variant: "destructive",
           });
         } finally {
           setIsLoading(false);
@@ -150,26 +159,26 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
   const onSubmit = async (data: TeacherFormValues) => {
     try {
       setIsLoading(true);
-      if (mode === 'ADD') {
+      if (mode === "ADD") {
         await createTeacher(data);
         toast({
-          title: 'Success',
-          description: 'Teacher created successfully',
+          title: "Success",
+          description: "Teacher created successfully",
         });
-      } else if (mode === 'EDIT' && teacherId) {
+      } else if (mode === "EDIT" && teacherId) {
         await updateTeacher(teacherId, data);
         toast({
-          title: 'Success',
-          description: 'Teacher updated successfully',
+          title: "Success",
+          description: "Teacher updated successfully",
         });
       }
-      navigate('/teachers');
+      navigate("/teachers");
     } catch (error) {
-      console.error('Error saving teacher', error);
+      console.error("Error saving teacher", error);
       toast({
-        title: 'Error',
-        description: 'Failed to save teacher',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to save teacher",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -180,11 +189,18 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
     <Card className="min-w-[calc(100vw-1000px)] max-h-[calc(100vh-200px)] overflow-auto">
       <CardHeader>
         <CardTitle>
-          {mode === 'ADD' ? 'Add New Teacher' : mode === 'EDIT' ? 'Edit Teacher' : 'Teacher Details'}
+          {mode === "ADD"
+            ? "Add New Teacher"
+            : mode === "EDIT"
+            ? "Edit Teacher"
+            : "Teacher Details"}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-between h-full">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-6 flex flex-col justify-between h-full"
+        >
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-auto">
             {/* User Select */}
             <div className="space-y-2">
@@ -193,10 +209,12 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
               <Input
                 id="qualification"
                 disabled={isViewMode || isLoading}
-                {...form.register('name')}
+                {...form.register("name")}
               />
               {form.formState.errors.name && (
-                <p className="text-sm text-red-500">{form.formState.errors.name.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.name.message}
+                </p>
               )}
             </div>
 
@@ -205,8 +223,8 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
               <Label htmlFor="department_id">Department</Label>
               <Select
                 disabled={isViewMode || isLoading}
-                onValueChange={(value) => form.setValue('department_id', value)}
-                value={form.watch('department_id')}
+                onValueChange={(value) => form.setValue("department_id", value)}
+                value={form.watch("department_id")}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select department" />
@@ -220,7 +238,9 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                 </SelectContent>
               </Select>
               {form.formState.errors.department_id && (
-                <p className="text-sm text-red-500">{form.formState.errors.department_id.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.department_id.message}
+                </p>
               )}
             </div>
 
@@ -230,10 +250,12 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
               <Input
                 id="qualification"
                 disabled={isViewMode || isLoading}
-                {...form.register('qualification')}
+                {...form.register("qualification")}
               />
               {form.formState.errors.qualification && (
-                <p className="text-sm text-red-500">{form.formState.errors.qualification.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.qualification.message}
+                </p>
               )}
             </div>
 
@@ -244,10 +266,12 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                 id="joining_date"
                 type="date"
                 disabled={isViewMode || isLoading}
-                {...form.register('joining_date')}
+                {...form.register("joining_date")}
               />
               {form.formState.errors.joining_date && (
-                <p className="text-sm text-red-500">{form.formState.errors.joining_date.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.joining_date.message}
+                </p>
               )}
             </div>
 
@@ -256,8 +280,10 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
               <Label>Status</Label>
               <RadioGroup
                 disabled={isViewMode || isLoading}
-                onValueChange={(value) => form.setValue('status', value as 'active' | 'inactive')}
-                value={form.watch('status')}
+                onValueChange={(value) =>
+                  form.setValue("status", value as "active" | "inactive")
+                }
+                value={form.watch("status")}
                 className="flex space-x-4"
               >
                 <div className="flex items-center space-x-2">
@@ -270,7 +296,9 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                 </div>
               </RadioGroup>
               {form.formState.errors.status && (
-                <p className="text-sm text-red-500">{form.formState.errors.status.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.status.message}
+                </p>
               )}
             </div>
           </div>
@@ -283,18 +311,18 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                   type="button"
                   variant="outline"
                   disabled={isLoading}
-                  onClick={() => navigate('/teachers')}
+                  onClick={() => navigate("/teachers")}
                 >
                   Cancel
                 </Button>
                 <Button type="submit" disabled={isLoading}>
-                  {isLoading ? 'Saving...' : 'Save'}
+                  {isLoading ? "Saving..." : "Save"}
                 </Button>
               </>
             ) : (
               <Button
                 type="button"
-                onClick={() => navigate('/teachers')}
+                onClick={() => navigate("/teachers")}
                 className="w-full sm:w-auto"
               >
                 Back to List
