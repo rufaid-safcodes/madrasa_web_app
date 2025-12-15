@@ -198,7 +198,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
           onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-6 flex flex-col justify-between h-full"
         >
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 mb-auto">
+          <div className="space-y-6">
             {/* Admission Number */}
             <div className="space-y-2">
               <Label htmlFor="admission_no">Admission Number</Label>
@@ -206,6 +206,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 id="admission_no"
                 disabled={isViewMode || isLoading}
                 {...form.register("admission_no")}
+                className="w-full"
               />
               {form.formState.errors.admission_no && (
                 <p className="text-sm text-red-500">
@@ -221,6 +222,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 id="first_name"
                 disabled={isViewMode || isLoading}
                 {...form.register("first_name")}
+                className="w-full"
               />
               {form.formState.errors.first_name && (
                 <p className="text-sm text-red-500">
@@ -236,6 +238,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 id="last_name"
                 disabled={isViewMode || isLoading}
                 {...form.register("last_name")}
+                className="w-full"
               />
               {form.formState.errors.last_name && (
                 <p className="text-sm text-red-500">
@@ -279,6 +282,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 type="date"
                 disabled={isViewMode || isLoading}
                 {...form.register("dob")}
+                className="w-full"
               />
               {form.formState.errors.dob && (
                 <p className="text-sm text-red-500">
@@ -295,6 +299,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 type="tel"
                 disabled={isViewMode || isLoading}
                 {...form.register("phone")}
+                className="w-full"
               />
               {form.formState.errors.phone && (
                 <p className="text-sm text-red-500">
@@ -310,6 +315,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 id="guardian_name"
                 disabled={isViewMode || isLoading}
                 {...form.register("guardian_name")}
+                className="w-full"
               />
               {form.formState.errors.guardian_name && (
                 <p className="text-sm text-red-500">
@@ -319,12 +325,13 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
             </div>
 
             {/* Address */}
-            <div className="space-y-2 md:col-span-2">
+            <div className="space-y-2">
               <Label htmlFor="address">Address</Label>
               <Textarea
                 id="address"
                 disabled={isViewMode || isLoading}
                 {...form.register("address")}
+                className="w-full"
               />
               {form.formState.errors.address && (
                 <p className="text-sm text-red-500">
@@ -341,6 +348,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 type="date"
                 disabled={isViewMode || isLoading}
                 {...form.register("admission_date")}
+                className="w-full"
               />
               {form.formState.errors.admission_date && (
                 <p className="text-sm text-red-500">
@@ -349,7 +357,6 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
               )}
             </div>
 
-            {/* Status */}
             {/* Status */}
             <div className="space-y-2">
               <Label>Status</Label>
@@ -394,7 +401,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
                 }
                 value={form.watch("academic_year_id")}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select academic year" />
                 </SelectTrigger>
                 <SelectContent>
