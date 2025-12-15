@@ -172,7 +172,7 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
       </CardHeader>
       <CardContent>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 p-4">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="space-y-6">
             {/* Grade */}
             <div className="space-y-2">
               <Label htmlFor="grade_id">Grade</Label>
@@ -181,7 +181,7 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
                 onValueChange={(value) => form.setValue('grade_id', value)}
                 value={form.watch('grade_id')}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select grade" />
                 </SelectTrigger>
                 <SelectContent>
@@ -199,41 +199,47 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
 
             {/* Division */}
             <div className="space-y-2">
-              <Label>Division</Label>
-              <RadioGroup
+              <Label htmlFor="division_id">Division</Label>
+              <Select
                 disabled={isViewMode || isLoading}
                 onValueChange={(value: 'A' | 'B' | 'C') => form.setValue('division_id', value)}
                 value={form.watch('division_id')}
-                className="flex space-x-4"
               >
-                {['A', 'B', 'C'].map((div) => (
-                  <div key={div} className="flex items-center space-x-2">
-                    <RadioGroupItem value={div} id={`div-${div}`} />
-                    <Label htmlFor={`div-${div}`}>Division {div}</Label>
-                  </div>
-                ))}
-              </RadioGroup>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select division" />
+                </SelectTrigger>
+                <SelectContent>
+                  {['A', 'B', 'C'].map((div) => (
+                    <SelectItem key={div} value={div}>
+                      Division {div}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Class Mode */}
             <div className="space-y-2">
-              <Label>Batch</Label>
-              <RadioGroup
+              <Label htmlFor="class_mode_id">Batch</Label>
+              <Select
                 disabled={isViewMode || isLoading}
                 onValueChange={(value: 'morning' | 'evening') => form.setValue('class_mode_id', value)}
                 value={form.watch('class_mode_id')}
-                className="flex space-x-4"
               >
-                {[
-                  { value: 'morning', label: 'Morning' },
-                  { value: 'evening', label: 'Evening' },
-                ].map((mode) => (
-                  <div key={mode.value} className="flex items-center space-x-2">
-                    <RadioGroupItem value={mode.value} id={`mode-${mode.value}`} />
-                    <Label htmlFor={`mode-${mode.value}`}>{mode.label}</Label>
-                  </div>
-                ))}
-              </RadioGroup>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select batch" />
+                </SelectTrigger>
+                <SelectContent>
+                  {[
+                    { value: 'morning', label: 'Morning' },
+                    { value: 'evening', label: 'Evening' },
+                  ].map((mode) => (
+                    <SelectItem key={mode.value} value={mode.value}>
+                      {mode.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Academic Year */}
@@ -248,14 +254,14 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
             </div>
 
             {/* Homeroom Teacher */}
-            <div className="space-y-2 md:col-span-2">
+            <div className="space-y-2">
               <Label htmlFor="teacher_id">Homeroom Teacher</Label>
               <Select
                 disabled={isViewMode || isLoading}
                 onValueChange={(value) => form.setValue('teacher_id', value)}
                 value={form.watch('teacher_id')}
               >
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select homeroom teacher" />
                 </SelectTrigger>
                 <SelectContent>
@@ -278,7 +284,7 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
                 disabled={isViewMode || isLoading}
                 onValueChange={(value: 'active' | 'inactive') => form.setValue('status', value)}
                 value={form.watch('status')}
-                className="flex space-x-4"
+                className="flex flex-col space-y-2"
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="active" id="status-active" />
