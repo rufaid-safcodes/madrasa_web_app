@@ -284,15 +284,15 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
                 disabled={isViewMode || isLoading}
                 onValueChange={(value: 'active' | 'inactive') => form.setValue('status', value)}
                 value={form.watch('status')}
-                className="flex flex-col space-y-2"
+                className="flex space-x-4"
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="active" id="status-active" />
-                  <Label htmlFor="status-active">Active</Label>
+                  <Label htmlFor="status-active" className="cursor-pointer">Active</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="inactive" id="status-inactive" />
-                  <Label htmlFor="status-inactive">Inactive</Label>
+                  <Label htmlFor="status-inactive" className="cursor-pointer">Inactive</Label>
                 </div>
               </RadioGroup>
             </div>

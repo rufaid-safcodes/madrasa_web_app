@@ -283,15 +283,15 @@ export function TeacherForm({ mode, teacherId }: TeacherFormProps) {
                   form.setValue("status", value as "active" | "inactive")
                 }
                 value={form.watch("status")}
-                className="flex flex-col space-y-2"
+                className="flex space-x-4"
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="active" id="active" />
-                  <Label htmlFor="active">Active</Label>
+                  <Label htmlFor="active" className="cursor-pointer">Active</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="inactive" id="inactive" />
-                  <Label htmlFor="inactive">Inactive</Label>
+                  <Label htmlFor="inactive" className="cursor-pointer">Inactive</Label>
                 </div>
               </RadioGroup>
               {form.formState.errors.status && (
