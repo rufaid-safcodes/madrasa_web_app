@@ -24,6 +24,9 @@ import AddClassRoom from "./features/classrooms/add/page"
 import EditClassRoom from "./features/classrooms/edit/page"
 import ViewClassRoom from "./features/classrooms/view/page"
 import Subjects from "./features/subjects/page"
+import AddSubjects from "./features/subjects/add/page"
+import EditSubject from "./features/subjects/edit/page"
+import ViewSubject from "./features/subjects/view/page"
 
 function App() {
   return (
@@ -57,6 +60,9 @@ function App() {
 
               {/* subjects */}
               <Route path="/subjects" element={<Subjects />} />
+              <Route path="/subjects/add-subjects" element={<AddSubjects />} />
+              <Route path="/subjects/edit-subjects/:id" element={<EditSubject />} />
+              <Route path="/subjects/view-subjects/:id" element={<ViewSubject />} />
 
               {/* classrooms */}
               <Route path="/classrooms" element={<ClassRooms />} />

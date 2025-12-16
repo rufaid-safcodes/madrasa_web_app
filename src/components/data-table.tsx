@@ -245,7 +245,7 @@ export function DataTable<TData extends { id: string }, TValue>({
                             }
                           }}
                         >
-                          Remove teacher
+                          Remove {entityType}
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

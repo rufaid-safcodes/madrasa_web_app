@@ -16,11 +16,11 @@ export function Subjects() {
         <DataTable
           columns={subjectColumns}
           data={subjectsData}
-          filterColumn="phone"
+          filterColumn="subject_name"
           entityType="subject"
           onRemove={async (id) => {
             // TODO: Replace with your actual API call
-            console.log("Removing student with ID:", id);
+            console.log("Removing subject with ID:", id);
             // Example API call (uncomment when you're ready to implement):
             // await fetch(`/api/subjects/${id}`, { method: 'DELETE' });
             // Refresh the data after removal
