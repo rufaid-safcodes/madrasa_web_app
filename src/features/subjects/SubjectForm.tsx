@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/components/ui/use-toast";
 import { subjectsData } from "@/lib/data";
 
@@ -23,7 +24,7 @@ type Subject = {
   id: string;
   subject_name: string;
   department_id: string;
-  status: "active" | "inactive";
+  status: "active" | "inactive" | "graduated";  // Add "graduated" here
 };
 
 type SubjectFormProps = {
@@ -44,7 +45,7 @@ const departments = [
 const subjectFormSchema = z.object({
   subject_name: z.string().min(1, "Subject name is required"),
   department_id: z.string().min(1, "Department is required"),
-  status: z.enum(["active", "inactive"]),
+  status: z.enum(["active", "inactive", "graduated"]),
 });
 
 type SubjectFormValues = z.infer<typeof subjectFormSchema>;
@@ -211,7 +212,7 @@ export function SubjectForm({ mode = "ADD", subjectId }: SubjectFormProps) {
               onValueChange={(value) => form.setValue("department_id", value)}
               value={form.watch("department_id")}
             >
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select department" />
               </SelectTrigger>
               <SelectContent>
@@ -229,25 +230,39 @@ export function SubjectForm({ mode = "ADD", subjectId }: SubjectFormProps) {
             )}
           </div>
 
-          {/* Status */}
-          <div className="space-y-2">
-            <Label>Status</Label>
-            <Select
-              disabled={isViewMode || isLoading}
-              onValueChange={(value: "active" | "inactive") =>
-                form.setValue("status", value)
-              }
-              value={form.watch("status")}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="inactive">Inactive</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+         {/* Status */}
+            <div className="space-y-2">
+              <Label>Status</Label>
+              <RadioGroup
+                disabled={isViewMode || isLoading}
+                onValueChange={(value) =>
+                  form.setValue(
+                    "status",
+                    value as "active" | "inactive" | "graduated"
+                  )
+                }
+                value={form.watch("status")}
+                className="flex space-x-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="active" id="status-active" />
+                  <Label htmlFor="status-active">Active</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="inactive" id="status-inactive" />
+                  <Label htmlFor="status-inactive">Inactive</Label>
+                </div>
+                {/* <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="graduated" id="status-graduated" />
+                  <Label htmlFor="status-graduated">Graduated</Label>
+                </div> */}
+              </RadioGroup>
+              {form.formState.errors.status && (
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.status.message}
+                </p>
+              )}
+            </div>
 
           {/* Buttons */}
           {!isViewMode && (
