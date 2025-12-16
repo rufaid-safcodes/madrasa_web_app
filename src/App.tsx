@@ -47,16 +47,6 @@ function App() {
               <Route path="/attendance" element={<Attendance />} />
               <Route path="/payments-and-fees" element={<Payments />} />
 
-              <Route path="/staffs/accounts" element={<Staffs />} />
-              <Route path="/staffs/accounts/add-staff" element={<AddStaff />} />
-              <Route path="/staffs/edit-staffs/:id" element={<EditStaff />} />
-              <Route path="/staffs/view-staffs/:id" element={<ViewStaff />} />
-
-              <Route path="/classrooms" element={<ClassRooms />} />
-              <Route path="/classrooms/add-classroom" element={<AddClassRoom />} />
-              <Route path="/classrooms/edit-classroom/:id" element={<EditClassRoom />} />
-              <Route path="/classrooms/view-classroom/:id" element={<ViewClassRoom />} />
-
               {/* students */}
               <Route path="/students" element={<Students />} />
               <Route path="/students/add-students" element={<AddStudents />} />
@@ -64,11 +54,24 @@ function App() {
               <Route path="/students/view-students/:id" element={<ViewStudent />} />
               <Route path="/students/students-bulk-upload" element={<BulkUploadStudents />} />
 
+              {/* classrooms */}
+              <Route path="/classrooms" element={<ClassRooms />} />
+              <Route path="/classrooms/add-classroom" element={<AddClassRoom />} />
+              <Route path="/classrooms/edit-classroom/:id" element={<EditClassRoom />} />
+              <Route path="/classrooms/view-classroom/:id" element={<ViewClassRoom />} />
+
               {/* teachers */}
               <Route path="/teachers" element={<Teachers />} />
               <Route path="/teachers/add-teachers" element={<AddTeachers />} />
               <Route path="/teachers/edit-teachers/:id" element={<EditTeacher />} />
               <Route path="/teachers/view-teachers/:id" element={<ViewTeacher />} />
+
+              {/* staffs */}
+              <Route path="/staffs/accounts" element={<Staffs />} />
+              <Route path="/staffs/accounts/add-staff" element={<AddStaff />} />
+              <Route path="/staffs/edit-staffs/:id" element={<EditStaff />} />
+              <Route path="/staffs/view-staffs/:id" element={<ViewStaff />} />
+
             </Routes>
           </div>
         </main>
