@@ -264,26 +264,36 @@ export function SubjectForm({ mode = "ADD", subjectId }: SubjectFormProps) {
               )}
             </div>
 
-          {/* Buttons */}
-          {!isViewMode && (
-            <div className="flex justify-end space-x-4 pt-4">
+          {/* Form Actions */}
+          <div className="flex justify-end space-x-4 pt-4">
+            {!isViewMode ? (
+              <>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => navigate("/subjects")}
+                  disabled={isLoading}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading
+                    ? "Saving..."
+                    : mode === "ADD"
+                    ? "Create Subject"
+                    : "Save Changes"}
+                </Button>
+              </>
+            ) : (
               <Button
                 type="button"
-                variant="outline"
                 onClick={() => navigate("/subjects")}
-                disabled={isLoading}
+                className="w-full sm:w-auto"
               >
-                Cancel
+                Back to List
               </Button>
-              <Button type="submit" disabled={isLoading}>
-                {isLoading
-                  ? "Saving..."
-                  : mode === "ADD"
-                  ? "Create Subject"
-                  : "Save Changes"}
-              </Button>
-            </div>
-          )}
+            )}
+          </div>
         </form>
       </CardContent>
     </Card>
