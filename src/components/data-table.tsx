@@ -81,7 +81,7 @@ export function DataTable<TData extends { id: string }, TValue>({
   return (
     <div className="w-full">
       {/* 🔍 Search Input */}
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 gap-2">
         <Input
           placeholder={`Filter ${filterColumn}...`}
           value={
@@ -116,6 +116,20 @@ export function DataTable<TData extends { id: string }, TValue>({
               ))}
           </DropdownMenuContent>
         </DropdownMenu>
+        {/* Add New Entity Button */}
+        <Button
+          variant="outline"
+          className="capitalize"
+          onClick={() =>
+            navigate(
+              `/${
+                entityType === "classroom" ? "classrooms" : `${entityType}s`
+              }/add-${entityType}${entityType === "classroom" ? "" : "s"}`
+            )
+          }
+        >
+          Add {entityType}
+        </Button>
       </div>
 
       {/* Table */}
@@ -211,7 +225,13 @@ export function DataTable<TData extends { id: string }, TValue>({
                         <DropdownMenuItem
                           onClick={() =>
                             navigate(
-                              `/${entityType === 'classroom' ? 'classrooms' : `${entityType}s`}/view-${entityType}${entityType === 'classroom' ? '' : 's'}/${row.original.id}`
+                              `/${
+                                entityType === "classroom"
+                                  ? "classrooms"
+                                  : `${entityType}s`
+                              }/view-${entityType}${
+                                entityType === "classroom" ? "" : "s"
+                              }/${row.original.id}`
                             )
                           }
                         >
@@ -220,7 +240,13 @@ export function DataTable<TData extends { id: string }, TValue>({
                         <DropdownMenuItem
                           onClick={() =>
                             navigate(
-                              `/${entityType === 'classroom' ? 'classrooms' : `${entityType}s`}/edit-${entityType}${entityType === 'classroom' ? '' : 's'}/${row.original.id}`
+                              `/${
+                                entityType === "classroom"
+                                  ? "classrooms"
+                                  : `${entityType}s`
+                              }/edit-${entityType}${
+                                entityType === "classroom" ? "" : "s"
+                              }/${row.original.id}`
                             )
                           }
                         >
