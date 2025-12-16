@@ -29,25 +29,6 @@ const items = [
     icon: Home,
   },
   {
-    title: "Attendance",
-    url: "/attendance",
-    icon: Search,
-  },
-  {
-    title: "Class Rooms",
-    url: "/classrooms",
-    icon: Calendar,
-    list: [
-      { name: "Manage Class Rooms", url: "/classrooms" },
-      { name: "Add Class Room", url: "/classrooms/add-classroom" },
-    ],
-  },
-  {
-    title: "Payments and Fees",
-    url: "/payments-and-fees",
-    icon: Calendar,
-  },
-  {
     title: "Students",
     url: "/students",
     icon: Users2,
@@ -55,6 +36,32 @@ const items = [
       { name: "Manage Students", url: "/students" },
       { name: "Add Student", url: "/students/add-students" },
       { name: "Bulk Upload", url: "/students/students-bulk-upload" },
+    ],
+  },
+  {
+    title: "Classrooms",
+    url: "/classrooms",
+    icon: Calendar,
+    list: [
+      { name: "Classrooms", url: "/classrooms" },
+      { name: "Timetable Classes", url: "/classrooms/timetable-classes" },
+      { name: "Subjects", url: "/classrooms/subjects" },
+      { name: "Class Modes", url: "/classrooms/class-modes" },
+      {
+        name: "Assign Students to Classrooms",
+        url: "/classrooms/assign-students-to-classrooms",
+      },
+      { name: "Add Class Room", url: "/classrooms/add-classroom" },
+    ],
+  },
+  {
+    title: "Attendance",
+    url: "/attendance",
+    icon: Search,
+    list: [
+      { name: "Take Attendance", url: "/teachers" },
+      { name: "Edit Attendance", url: "/teachers/add-teachers" },
+      { name: "Attendance Reports", url: "/teachers/departments" },
     ],
   },
   {
@@ -77,9 +84,25 @@ const items = [
     ],
   },
   {
+    title: "Accounts and Fees",
+    url: "/payments-and-fees",
+    icon: Calendar,
+    list: [
+      { name: "Due Fees", url: "/payments-and-fees/due-fees" },
+      { name: "Transactions", url: "/payments-and-fees/transactions" },
+      { name: "Fee Settings", url: "/payments-and-fees/fee-settings" },
+    ],
+  },
+  {
     title: "Settings",
     url: "/settings",
     icon: Settings,
+    list: [
+      { name: "General Settings", url: "/settings/general-settings" },
+      { name: "Academic Year", url: "/settings/academic-year" },
+      { name: "User/Roles", url: "/settings/user-roles" },
+      { name: "Backup/Import/Export", url: "/settings/backup-import-export" },
+    ],
   },
 ];
 
@@ -131,9 +154,10 @@ export function AppSidebar() {
                           end={!item.list}
                           // style={{ color: "#fff" }}
                           className={({ isActive }) =>
-                            `flex items-center gap-2 rounded-md p-3 transition-colors text-sm text-white font-medium ${isActive && !item.list
-                              ? "bg-white text-black!"
-                              : "text-white! hover:bg-white! hover:text-black!"
+                            `flex items-center gap-2 rounded-md p-3 transition-colors text-sm text-white font-medium ${
+                              isActive && !item.list
+                                ? "bg-white text-black!"
+                                : "text-white! hover:bg-white! hover:text-black!"
                             }`
                           }
                         >
@@ -142,10 +166,11 @@ export function AppSidebar() {
                           {item.list && (
                             <ChevronDown
                               onClick={(e) => handleExpand(e, item.title)}
-                              className={`w-4 h-4 transition-transform duration-200 ${expandedItems.includes(item.title)
-                                ? "rotate-180"
-                                : ""
-                                }`}
+                              className={`w-4 h-4 transition-transform duration-200 ${
+                                expandedItems.includes(item.title)
+                                  ? "rotate-180"
+                                  : ""
+                              }`}
                             />
                           )}
                         </NavLink>
@@ -161,9 +186,10 @@ export function AppSidebar() {
                           to={sub.url}
                           end
                           className={({ isActive }) =>
-                            `block px-3 py-2 text-sm rounded-md transition-colors ${isActive
-                              ? "bg-white text-black!"
-                              : "text-white! hover:bg-white! hover:text-black!"
+                            `block px-3 py-2 text-sm rounded-md transition-colors ${
+                              isActive
+                                ? "bg-white text-black!"
+                                : "text-white! hover:bg-white! hover:text-black!"
                             }`
                           }
                         >
