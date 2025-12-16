@@ -174,7 +174,7 @@ export function SubjectForm({ mode = "ADD", subjectId }: SubjectFormProps) {
   }
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className="min-w-[calc(100vw-1000px)] max-h-[calc(100vh-200px)] overflow-auto">
       <CardHeader>
         <CardTitle>
           {mode === "ADD"
