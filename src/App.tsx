@@ -27,6 +27,8 @@ import Subjects from "./features/subjects/page"
 import AddSubjects from "./features/subjects/add/page"
 import EditSubject from "./features/subjects/edit/page"
 import ViewSubject from "./features/subjects/view/page"
+import Batches from "./features/batches/page"
+// import Batches from "./features/batches/page"
 
 function App() {
   return (
@@ -63,6 +65,12 @@ function App() {
               <Route path="/subjects/add-subjects" element={<AddSubjects />} />
               <Route path="/subjects/edit-subjects/:id" element={<EditSubject />} />
               <Route path="/subjects/view-subjects/:id" element={<ViewSubject />} />
+
+              {/* batches */}
+              <Route path="/batches" element={<Batches />} />
+              {/* <Route path="/batches/add-batches" element={<AddBatches />} /> */}
+              {/* <Route path="/batches/edit-batches/:id" element={<EditBatches />} /> */}
+              {/* <Route path="/batches/view-batches/:id" element={<ViewBatches />} /> */}
 
               {/* classrooms */}
               <Route path="/classrooms" element={<ClassRooms />} />

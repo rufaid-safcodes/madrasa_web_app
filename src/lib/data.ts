@@ -32,6 +32,29 @@ export type Student = {
   joining_date: string; // Date in ISO format (YYYY-MM-DD)
 };
 
+export type Classroom = {
+  id: string; // UUID PK
+  grade_id: number; // 1-10
+  division_id: 'A' | 'B' | 'C';
+  class_mode_id: 'morning' | 'evening';
+  academic_year_id: string; // FK to academic_years
+  teacher_id: string; // FK to users (homeroom teacher)
+  status: 'active' | 'inactive';
+  created_at: string;
+  updated_at: string;
+};
+
+export type Subject = {
+  id: string; // PK
+  subject_name: string;
+  department_id: string; // FK to departments
+};
+
+export type Batch = {
+  id: string;
+  batchName: string;
+};
+
 export const teachersData: User[] = [
   {
     id: "1",
@@ -1052,17 +1075,6 @@ export const studentColumns: ColumnDef<Student>[] = [
   },
 ];
 
-export type Classroom = {
-  id: string; // UUID PK
-  grade_id: number; // 1-10
-  division_id: 'A' | 'B' | 'C';
-  class_mode_id: 'morning' | 'evening';
-  academic_year_id: string; // FK to academic_years
-  teacher_id: string; // FK to users (homeroom teacher)
-  status: 'active' | 'inactive';
-  created_at: string;
-  updated_at: string;
-};
 
 export const classroomColumns: ColumnDef<Classroom>[] = [
   {
@@ -1175,14 +1187,6 @@ export const classroomData: Classroom[] = [
   },
 ];
 
-// Subject type definition
-export type Subject = {
-  id: string; // PK
-  subject_name: string;
-  department_id: string; // FK to departments
-};
-
-// Sample subject data
 export const subjectsData: Subject[] = [
   {
     id: 'sub-001',
@@ -1211,7 +1215,6 @@ export const subjectsData: Subject[] = [
   },
 ];
 
-// Subject columns for data table
 export const subjectColumns: ColumnDef<Subject>[] = [
   {
     accessorKey: 'id',
@@ -1224,5 +1227,36 @@ export const subjectColumns: ColumnDef<Subject>[] = [
   {
     accessorKey: 'department_id',
     header: 'Department ID',
+  },
+];
+
+
+export const batchColumns: ColumnDef<Batch>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "batchName",
+    header: "Batch Name",
+  },
+];
+
+export const batchData: Batch[] = [
+  {
+    id: "1",
+    batchName: "Morning Batch",
+  },
+  {
+    id: "2",
+    batchName: "Evening Batch",
+  },
+  {
+    id: "3",
+    batchName: "Weekend Batch",
+  },
+  {
+    id: "4",
+    batchName: "Special Batches",
   },
 ];
