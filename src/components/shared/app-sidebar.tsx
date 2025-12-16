@@ -45,7 +45,7 @@ const items = [
     list: [
       { name: "Classrooms", url: "/classrooms" },
       { name: "Timetable Classes", url: "/classrooms/timetable-classes" },
-      { name: "Subjects", url: "/classrooms/subjects" },
+      { name: "Subjects", url: "/subjects" },
       { name: "Class Modes", url: "/classrooms/class-modes" },
       {
         name: "Assign Students to Classrooms",

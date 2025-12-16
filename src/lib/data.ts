@@ -1174,3 +1174,55 @@ export const classroomData: Classroom[] = [
     updated_at: '2023-06-01T08:00:00Z',
   },
 ];
+
+// Subject type definition
+export type Subject = {
+  id: string; // PK
+  subject_name: string;
+  department_id: string; // FK to departments
+};
+
+// Sample subject data
+export const subjectsData: Subject[] = [
+  {
+    id: 'sub-001',
+    subject_name: 'Quran Recitation',
+    department_id: 'dept-001',
+  },
+  {
+    id: 'sub-002',
+    subject_name: 'Tajweed',
+    department_id: 'dept-001',
+  },
+  {
+    id: 'sub-003',
+    subject_name: 'Fiqh',
+    department_id: 'dept-002',
+  },
+  {
+    id: 'sub-004',
+    subject_name: 'Hadith',
+    department_id: 'dept-002',
+  },
+  {
+    id: 'sub-005',
+    subject_name: 'Arabic Language',
+    department_id: 'dept-003',
+  },
+];
+
+// Subject columns for data table
+export const subjectColumns: ColumnDef<Subject>[] = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+  },
+  {
+    accessorKey: 'subject_name',
+    header: 'Subject Name',
+  },
+  {
+    accessorKey: 'department_id',
+    header: 'Department ID',
+  },
+];

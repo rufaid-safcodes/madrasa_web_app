@@ -23,6 +23,7 @@ import ViewStaff from "./features/staff/view/page"
 import AddClassRoom from "./features/classrooms/add/page"
 import EditClassRoom from "./features/classrooms/edit/page"
 import ViewClassRoom from "./features/classrooms/view/page"
+import Subjects from "./features/subjects/page"
 
 function App() {
   return (
@@ -53,6 +54,9 @@ function App() {
               <Route path="/students/edit-students/:id" element={<EditStudent />} />
               <Route path="/students/view-students/:id" element={<ViewStudent />} />
               <Route path="/students/students-bulk-upload" element={<BulkUploadStudents />} />
+
+              {/* subjects */}
+              <Route path="/subjects" element={<Subjects />} />
 
               {/* classrooms */}
               <Route path="/classrooms" element={<ClassRooms />} />
