@@ -89,7 +89,7 @@ function App() {
 
               {/* staffs */}
               <Route path="/staffs/accounts" element={<Staffs />} />
-              <Route path="/staffs/accounts/add-staff" element={<AddStaff />} />
+              <Route path="/staffs/add-staffs" element={<AddStaff />} />
               <Route path="/staffs/edit-staffs/:id" element={<EditStaff />} />
               <Route path="/staffs/view-staffs/:id" element={<ViewStaff />} />
 
