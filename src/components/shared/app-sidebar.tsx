@@ -50,8 +50,7 @@ const items = [
       {
         name: "Assign Students to Classrooms",
         url: "/classrooms/assign-students-to-classrooms",
-      },
-      { name: "Add Class Room", url: "/classrooms/add-classroom" },
+      }
     ],
   },
   {
