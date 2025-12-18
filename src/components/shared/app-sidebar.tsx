@@ -58,9 +58,9 @@ const items = [
     url: "/attendance",
     icon: Search,
     list: [
-      { name: "Take Attendance", url: "/teachers" },
-      { name: "Edit Attendance", url: "/teachers/add-teachers" },
-      { name: "Attendance Reports", url: "/teachers/departments" },
+      { name: "Take Attendance", url: "/take-attendance" },
+      { name: "Edit Attendance", url: "/edit-attendance" },
+      { name: "Attendance Reports", url: "/attendance-reports" },
     ],
   },
   {
