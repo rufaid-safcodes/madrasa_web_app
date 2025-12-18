@@ -1,37 +1,43 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useToast } from "@/components/ui/use-toast"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 // Define types
 type ClassRoom = {
   id?: string;
   grade_id: string;
-  division_id: 'A' | 'B' | 'C';
-  class_mode_id: 'morning' | 'evening';
+  division_id: "A" | "B" | "C";
+  class_mode_id: "morning" | "evening";
   academic_year_id: string;
   teacher_id: string;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
 };
 
 type ClassRoomFormProps = {
-  mode: 'ADD' | 'EDIT' | 'VIEW';
+  mode: "ADD" | "EDIT" | "VIEW";
   classRoomId?: string;
 };
 
 // Mock data - in a real app, this would come from an API
 const mockTeachers = [
-  { id: 'tchr-001', name: 'John Doe' },
-  { id: 'tchr-002', name: 'Jane Smith' },
-  { id: 'tchr-003', name: 'Robert Johnson' },
+  { id: "tchr-001", name: "John Doe" },
+  { id: "tchr-002", name: "Jane Smith" },
+  { id: "tchr-003", name: "Robert Johnson" },
 ];
 
 // Current academic year
@@ -41,12 +47,12 @@ const academicYearId = `${currentYear}-${nextYear.toString().slice(2)}`;
 
 // Form validation schema
 const classRoomFormSchema = z.object({
-  grade_id: z.string().min(1, 'Grade is required'),
-  division_id: z.enum(['A', 'B', 'C']),
-  class_mode_id: z.enum(['morning', 'evening']),
-  academic_year_id: z.string().min(1, 'Academic year is required'),
-  teacher_id: z.string().min(1, 'Homeroom teacher is required'),
-  status: z.enum(['active', 'inactive']),
+  grade_id: z.string().min(1, "Grade is required"),
+  division_id: z.enum(["A", "B", "C"]),
+  class_mode_id: z.enum(["morning", "evening"]),
+  academic_year_id: z.string().min(1, "Academic year is required"),
+  teacher_id: z.string().min(1, "Homeroom teacher is required"),
+  status: z.enum(["active", "inactive"]),
 });
 
 type ClassRoomFormValues = z.infer<typeof classRoomFormSchema>;
@@ -58,12 +64,12 @@ const fetchClassRoom = async (id: string): Promise<ClassRoom> => {
       // Mock data - in a real app, this would come from an API
       const mockClassRoom: ClassRoom = {
         id,
-        grade_id: '5',
-        division_id: 'A',
-        class_mode_id: 'morning',
+        grade_id: "5",
+        division_id: "A",
+        class_mode_id: "morning",
         academic_year_id: academicYearId,
-        teacher_id: 'tchr-001',
-        status: 'active',
+        teacher_id: "tchr-001",
+        status: "active",
       };
       resolve(mockClassRoom);
     }, 500);
@@ -73,12 +79,18 @@ const fetchClassRoom = async (id: string): Promise<ClassRoom> => {
 const createClassRoom = async (data: ClassRoom): Promise<ClassRoom> => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({ ...data, id: `cls-${Math.random().toString(36).substr(2, 9)}` });
+      resolve({
+        ...data,
+        id: `cls-${Math.random().toString(36).substr(2, 9)}`,
+      });
     }, 500);
   });
 };
 
-const updateClassRoom = async (id: string, data: ClassRoom): Promise<ClassRoom> => {
+const updateClassRoom = async (
+  id: string,
+  data: ClassRoom
+): Promise<ClassRoom> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ ...data, id });
@@ -88,24 +100,24 @@ const updateClassRoom = async (id: string, data: ClassRoom): Promise<ClassRoom> 
 
 export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
   const navigate = useNavigate();
-  const { toast } = useToast()
-  const [isLoading, setIsLoading] = useState(mode !== 'ADD');
-  const isViewMode = mode === 'VIEW';
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(mode !== "ADD");
+  const isViewMode = mode === "VIEW";
 
   const form = useForm<ClassRoomFormValues>({
     resolver: zodResolver(classRoomFormSchema),
     defaultValues: {
-      grade_id: '',
-      division_id: 'A',
-      class_mode_id: 'morning',
+      grade_id: "",
+      division_id: "A",
+      class_mode_id: "morning",
       academic_year_id: academicYearId,
-      teacher_id: '',
-      status: 'active',
+      teacher_id: "",
+      status: "active",
     },
   });
 
   useEffect(() => {
-    if (mode !== 'ADD' && classRoomId) {
+    if (mode !== "ADD" && classRoomId) {
       const loadClassRoom = async () => {
         try {
           const classRoom = await fetchClassRoom(classRoomId);
@@ -118,11 +130,11 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
             status: classRoom.status,
           });
         } catch (error) {
-          console.error('Failed to load classroom', error);
+          console.error("Failed to load classroom", error);
           toast({
-            title: 'Error',
-            description: 'Failed to load classroom data',
-            variant: 'destructive',
+            title: "Error",
+            description: "Failed to load classroom data",
+            variant: "destructive",
           });
         } finally {
           setIsLoading(false);
@@ -136,26 +148,26 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
   const onSubmit = async (data: ClassRoomFormValues) => {
     try {
       setIsLoading(true);
-      if (mode === 'ADD') {
+      if (mode === "ADD") {
         await createClassRoom(data as ClassRoom);
         toast({
-          title: 'Success',
-          description: 'Classroom created successfully',
+          title: "Success",
+          description: "Classroom created successfully",
         });
-      } else if (mode === 'EDIT' && classRoomId) {
+      } else if (mode === "EDIT" && classRoomId) {
         await updateClassRoom(classRoomId, data as ClassRoom);
         toast({
-          title: 'Success',
-          description: 'Classroom updated successfully',
+          title: "Success",
+          description: "Classroom updated successfully",
         });
       }
-      navigate('/classrooms');
+      navigate("/classrooms");
     } catch (error) {
-      console.error('Error saving classroom', error);
+      console.error("Error saving classroom", error);
       toast({
-        title: 'Error',
-        description: 'Failed to save classroom',
-        variant: 'destructive',
+        title: "Error",
+        description: "Failed to save classroom",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -163,11 +175,14 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
   };
 
   return (
-
-      <Card className="min-w-[calc(100vw-1000px)] max-h-[calc(100vh-200px)] overflow-auto">
+    <Card className="min-w-[calc(100vw-1000px)] max-h-[calc(100vh-200px)] overflow-auto">
       <CardHeader>
         <CardTitle>
-          {mode === 'ADD' ? 'Add New Classroom' : mode === 'EDIT' ? 'Edit Classroom' : 'Classroom Details'}
+          {mode === "ADD"
+            ? "Add New Classroom"
+            : mode === "EDIT"
+            ? "Edit Classroom"
+            : "Classroom Details"}
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -178,8 +193,8 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
               <Label htmlFor="grade_id">Grade</Label>
               <Select
                 disabled={isViewMode || isLoading}
-                onValueChange={(value) => form.setValue('grade_id', value)}
-                value={form.watch('grade_id')}
+                onValueChange={(value) => form.setValue("grade_id", value)}
+                value={form.watch("grade_id")}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select grade" />
@@ -193,7 +208,9 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
                 </SelectContent>
               </Select>
               {form.formState.errors.grade_id && (
-                <p className="text-sm text-red-500">{form.formState.errors.grade_id.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.grade_id.message}
+                </p>
               )}
             </div>
 
@@ -202,14 +219,16 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
               <Label htmlFor="division_id">Division</Label>
               <Select
                 disabled={isViewMode || isLoading}
-                onValueChange={(value: 'A' | 'B' | 'C') => form.setValue('division_id', value)}
-                value={form.watch('division_id')}
+                onValueChange={(value: "A" | "B" | "C") =>
+                  form.setValue("division_id", value)
+                }
+                value={form.watch("division_id")}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select division" />
                 </SelectTrigger>
                 <SelectContent>
-                  {['A', 'B', 'C'].map((div) => (
+                  {["A", "B", "C"].map((div) => (
                     <SelectItem key={div} value={div}>
                       Division {div}
                     </SelectItem>
@@ -223,16 +242,18 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
               <Label htmlFor="class_mode_id">Batch</Label>
               <Select
                 disabled={isViewMode || isLoading}
-                onValueChange={(value: 'morning' | 'evening') => form.setValue('class_mode_id', value)}
-                value={form.watch('class_mode_id')}
+                onValueChange={(value: "morning" | "evening") =>
+                  form.setValue("class_mode_id", value)
+                }
+                value={form.watch("class_mode_id")}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select batch" />
                 </SelectTrigger>
                 <SelectContent>
                   {[
-                    { value: 'morning', label: 'Morning' },
-                    { value: 'evening', label: 'Evening' },
+                    { value: "morning", label: "Morning" },
+                    { value: "evening", label: "Evening" },
                   ].map((mode) => (
                     <SelectItem key={mode.value} value={mode.value}>
                       {mode.label}
@@ -248,7 +269,7 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
               <Input
                 id="academic_year_id"
                 disabled={true}
-                {...form.register('academic_year_id')}
+                {...form.register("academic_year_id")}
                 value={academicYearId}
               />
             </div>
@@ -258,8 +279,8 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
               <Label htmlFor="teacher_id">Homeroom Teacher</Label>
               <Select
                 disabled={isViewMode || isLoading}
-                onValueChange={(value) => form.setValue('teacher_id', value)}
-                value={form.watch('teacher_id')}
+                onValueChange={(value) => form.setValue("teacher_id", value)}
+                value={form.watch("teacher_id")}
               >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select homeroom teacher" />
@@ -273,7 +294,9 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
                 </SelectContent>
               </Select>
               {form.formState.errors.teacher_id && (
-                <p className="text-sm text-red-500">{form.formState.errors.teacher_id.message}</p>
+                <p className="text-sm text-red-500">
+                  {form.formState.errors.teacher_id.message}
+                </p>
               )}
             </div>
 
@@ -282,23 +305,29 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
               <Label>Status</Label>
               <RadioGroup
                 disabled={isViewMode || isLoading}
-                onValueChange={(value: 'active' | 'inactive') => form.setValue('status', value)}
-                value={form.watch('status')}
+                onValueChange={(value: "active" | "inactive") =>
+                  form.setValue("status", value)
+                }
+                value={form.watch("status")}
                 className="flex space-x-4"
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="active" id="status-active" />
-                  <Label htmlFor="status-active" className="cursor-pointer">Active</Label>
+                  <Label htmlFor="status-active" className="cursor-pointer">
+                    Active
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="inactive" id="status-inactive" />
-                  <Label htmlFor="status-inactive" className="cursor-pointer">Inactive</Label>
+                  <Label htmlFor="status-inactive" className="cursor-pointer">
+                    Inactive
+                  </Label>
                 </div>
               </RadioGroup>
             </div>
           </div>
 
-           {/* Form Actions */}
+          {/* Form Actions */}
           <div className="flex justify-end space-x-4 pt-4">
             {!isViewMode ? (
               <>
@@ -310,12 +339,15 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" disabled={isLoading}>
+                {/* <Button type="submit" disabled={isLoading}>
                   {isLoading
                     ? "Saving..."
                     : mode === "ADD"
-                    ? "Create Subject"
+                    ? "Create Classroom"
                     : "Save Changes"}
+                </Button> */}
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? "Saving..." : "Save"}
                 </Button>
               </>
             ) : (
@@ -330,7 +362,6 @@ export function ClassRoomForm({ mode, classRoomId }: ClassRoomFormProps) {
           </div>
         </form>
       </CardContent>
-      </Card>
-
+    </Card>
   );
 }

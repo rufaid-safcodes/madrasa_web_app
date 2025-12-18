@@ -24,7 +24,7 @@ type Subject = {
   id: string;
   subject_name: string;
   department_id: string;
-  status: "active" | "inactive" | "graduated";  // Add "graduated" here
+  status: "active" | "inactive" | "graduated"; // Add "graduated" here
 };
 
 type SubjectFormProps = {
@@ -230,39 +230,39 @@ export function SubjectForm({ mode = "ADD", subjectId }: SubjectFormProps) {
             )}
           </div>
 
-         {/* Status */}
-            <div className="space-y-2">
-              <Label>Status</Label>
-              <RadioGroup
-                disabled={isViewMode || isLoading}
-                onValueChange={(value) =>
-                  form.setValue(
-                    "status",
-                    value as "active" | "inactive" | "graduated"
-                  )
-                }
-                value={form.watch("status")}
-                className="flex space-x-4"
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="active" id="status-active" />
-                  <Label htmlFor="status-active">Active</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="inactive" id="status-inactive" />
-                  <Label htmlFor="status-inactive">Inactive</Label>
-                </div>
-                {/* <div className="flex items-center space-x-2">
+          {/* Status */}
+          <div className="space-y-2">
+            <Label>Status</Label>
+            <RadioGroup
+              disabled={isViewMode || isLoading}
+              onValueChange={(value) =>
+                form.setValue(
+                  "status",
+                  value as "active" | "inactive" | "graduated"
+                )
+              }
+              value={form.watch("status")}
+              className="flex space-x-4"
+            >
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="active" id="status-active" />
+                <Label htmlFor="status-active">Active</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="inactive" id="status-inactive" />
+                <Label htmlFor="status-inactive">Inactive</Label>
+              </div>
+              {/* <div className="flex items-center space-x-2">
                   <RadioGroupItem value="graduated" id="status-graduated" />
                   <Label htmlFor="status-graduated">Graduated</Label>
                 </div> */}
-              </RadioGroup>
-              {form.formState.errors.status && (
-                <p className="text-sm text-red-500">
-                  {form.formState.errors.status.message}
-                </p>
-              )}
-            </div>
+            </RadioGroup>
+            {form.formState.errors.status && (
+              <p className="text-sm text-red-500">
+                {form.formState.errors.status.message}
+              </p>
+            )}
+          </div>
 
           {/* Form Actions */}
           <div className="flex justify-end space-x-4 pt-4">
@@ -276,12 +276,15 @@ export function SubjectForm({ mode = "ADD", subjectId }: SubjectFormProps) {
                 >
                   Cancel
                 </Button>
-                <Button type="submit" disabled={isLoading}>
+                {/* <Button type="submit" disabled={isLoading}>
                   {isLoading
                     ? "Saving..."
                     : mode === "ADD"
                     ? "Create Subject"
                     : "Save Changes"}
+                </Button> */}
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading ? "Saving..." : "Save"}
                 </Button>
               </>
             ) : (
