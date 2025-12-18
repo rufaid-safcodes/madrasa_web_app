@@ -31,6 +31,10 @@ import Batches from "./features/batches/page"
 import AddBatch from "./features/batches/add/page"
 import EditBatch from "./features/batches/edit/page"
 import ViewBatch from "./features/batches/view/page"
+import Departments from "./features/departments/page"
+import AddDepartment from "./features/departments/add/page"
+import EditDepartment from "./features/departments/edit/page"
+import ViewDepartment from "./features/departments/view/page"
 // import Batches from "./features/batches/page"
 
 function App() {
@@ -86,6 +90,12 @@ function App() {
               <Route path="/teachers/add-teachers" element={<AddTeachers />} />
               <Route path="/teachers/edit-teachers/:id" element={<EditTeacher />} />
               <Route path="/teachers/view-teachers/:id" element={<ViewTeacher />} />
+
+              {/* departments */}
+              <Route path="/departments" element={<Departments />} />
+              <Route path="/departments/add-departments" element={<AddDepartment />} />
+              <Route path="/departments/edit-departments/:id" element={<EditDepartment />} />
+              <Route path="/departments/view-departments/:id" element={<ViewDepartment />} />
 
               {/* staffs */}
               <Route path="/staffs/accounts" element={<Staffs />} />

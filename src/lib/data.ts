@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type { ColumnDef } from "@tanstack/react-table";
 
 type UserStatus = "active" | "inactive" | "graduated";
@@ -35,11 +35,11 @@ export type Student = {
 export type Classroom = {
   id: string; // UUID PK
   grade_id: number; // 1-10
-  division_id: 'A' | 'B' | 'C';
-  class_mode_id: 'morning' | 'evening';
+  division_id: "A" | "B" | "C";
+  class_mode_id: "morning" | "evening";
   academic_year_id: string; // FK to academic_years
   teacher_id: string; // FK to users (homeroom teacher)
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
   created_at: string;
   updated_at: string;
 };
@@ -53,6 +53,11 @@ export type Subject = {
 export type Batch = {
   id: string;
   batchName: string;
+};
+
+export type Department = {
+  id: string;  // Changed from number to string
+  name: string;
 };
 
 export const teachersData: User[] = [
@@ -372,15 +377,21 @@ export const columns: ColumnDef<User>[] = [
     header: "Joining Date",
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }: { row: { original: User } }) => {
       const status = row.original.status;
-      return React.createElement('span', {
-        className: `px-2 py-1 rounded-full text-xs ${
-          status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-        }`
-      }, status.charAt(0).toUpperCase() + status.slice(1));
+      return React.createElement(
+        "span",
+        {
+          className: `px-2 py-1 rounded-full text-xs ${
+            status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-800"
+          }`,
+        },
+        status.charAt(0).toUpperCase() + status.slice(1)
+      );
     },
   },
   // {
@@ -397,7 +408,7 @@ export const staffData: User[] = [
     department: "Administration",
     designation: "Principal",
     joining_date: "2018-06-15",
-    status: "active"
+    status: "active",
   },
   {
     id: "2",
@@ -406,7 +417,7 @@ export const staffData: User[] = [
     department: "Administration",
     designation: "Vice Principal",
     joining_date: "2019-03-22",
-    status: "active"
+    status: "active",
   },
   {
     id: "3",
@@ -415,7 +426,7 @@ export const staffData: User[] = [
     department: "Accounts",
     designation: "Accountant",
     joining_date: "2020-01-10",
-    status: "active"
+    status: "active",
   },
   {
     id: "4",
@@ -424,7 +435,7 @@ export const staffData: User[] = [
     department: "Reception",
     designation: "Receptionist",
     joining_date: "2021-05-18",
-    status: "active"
+    status: "active",
   },
   {
     id: "5",
@@ -433,7 +444,7 @@ export const staffData: User[] = [
     department: "Maintenance",
     designation: "Facility Manager",
     joining_date: "2019-11-05",
-    status: "active"
+    status: "active",
   },
   {
     id: "6",
@@ -442,7 +453,7 @@ export const staffData: User[] = [
     department: "IT",
     designation: "IT Support",
     joining_date: "2021-02-28",
-    status: "active"
+    status: "active",
   },
   {
     id: "7",
@@ -451,7 +462,7 @@ export const staffData: User[] = [
     department: "Security",
     designation: "Security Head",
     joining_date: "2020-07-12",
-    status: "inactive"
+    status: "inactive",
   },
   {
     id: "8",
@@ -460,7 +471,7 @@ export const staffData: User[] = [
     department: "Library",
     designation: "Librarian",
     joining_date: "2021-08-15",
-    status: "active"
+    status: "active",
   },
   {
     id: "9",
@@ -469,7 +480,7 @@ export const staffData: User[] = [
     department: "Transport",
     designation: "Transport Incharge",
     joining_date: "2020-09-22",
-    status: "active"
+    status: "active",
   },
   {
     id: "10",
@@ -478,8 +489,8 @@ export const staffData: User[] = [
     department: "HR",
     designation: "HR Manager",
     joining_date: "2019-04-10",
-    status: "active"
-  }
+    status: "active",
+  },
 ];
 
 export const staffColumns: ColumnDef<User>[] = [
@@ -504,15 +515,21 @@ export const staffColumns: ColumnDef<User>[] = [
     header: "Joining Date",
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }: { row: { original: User } }) => {
       const status = row.original.status;
-      return React.createElement('span', {
-        className: `px-2 py-1 rounded-full text-xs ${
-          status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-        }`
-      }, status.charAt(0).toUpperCase() + status.slice(1));
+      return React.createElement(
+        "span",
+        {
+          className: `px-2 py-1 rounded-full text-xs ${
+            status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-800"
+          }`,
+        },
+        status.charAt(0).toUpperCase() + status.slice(1)
+      );
     },
   },
   // {
@@ -1031,7 +1048,7 @@ export const studentsData: Student[] = [
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
-  }
+  },
 ];
 
 export const studentColumns: ColumnDef<Student>[] = [
@@ -1062,61 +1079,72 @@ export const studentColumns: ColumnDef<Student>[] = [
     },
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }: { row: { original: Student } }) => {
       const status = row.original.status;
-      return React.createElement('span', {
-        className: `px-2 py-1 rounded-full text-xs ${
-          status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-        }`
-      }, status.charAt(0).toUpperCase() + status.slice(1));
+      return React.createElement(
+        "span",
+        {
+          className: `px-2 py-1 rounded-full text-xs ${
+            status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-800"
+          }`,
+        },
+        status.charAt(0).toUpperCase() + status.slice(1)
+      );
     },
   },
 ];
 
-
 export const classroomColumns: ColumnDef<Classroom>[] = [
   {
-    accessorKey: 'id',
-    header: 'ID',
+    accessorKey: "id",
+    header: "ID",
   },
   {
-    accessorKey: 'grade_id',
-    header: 'Grade',
+    accessorKey: "grade_id",
+    header: "Grade",
   },
   {
-    accessorKey: 'division_id',
-    header: 'Division',
+    accessorKey: "division_id",
+    header: "Division",
   },
   {
-    accessorKey: 'class_mode_id',
-    header: 'Batch',
+    accessorKey: "class_mode_id",
+    header: "Batch",
     cell: ({ row }: { row: { original: Classroom } }) => {
       const mode = row.original.class_mode_id;
       return mode.charAt(0).toUpperCase() + mode.slice(1);
     },
   },
   {
-    accessorKey: 'academic_year_id',
-    header: 'Academic Year',
+    accessorKey: "academic_year_id",
+    header: "Academic Year",
   },
   {
-    accessorKey: 'teacher_id',
-    header: 'Homeroom Teacher',
+    accessorKey: "teacher_id",
+    header: "Homeroom Teacher",
     // In a real app, you'd want to join with users table to get teacher name
     cell: ({ row }) => `Teacher ${row.original.teacher_id.substring(0, 5)}...`,
   },
   {
-    accessorKey: 'status',
-    header: 'Status',
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }: { row: { original: Classroom } }) => {
       const status = row.original.status;
-      return React.createElement('span', {
-        className: `px-2 py-1 rounded-full text-xs ${
-          status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-        }`
-      }, status.charAt(0).toUpperCase() + status.slice(1));
+      return React.createElement(
+        "span",
+        {
+          className: `px-2 py-1 rounded-full text-xs ${
+            status === "active"
+              ? "bg-green-100 text-green-800"
+              : "bg-gray-100 text-gray-800"
+          }`,
+        },
+        status.charAt(0).toUpperCase() + status.slice(1)
+      );
     },
   },
 ];
@@ -1131,105 +1159,104 @@ export const classroomColumns: ColumnDef<Classroom>[] = [
 
 export const classroomData: Classroom[] = [
   {
-    id: '1',
+    id: "1",
     grade_id: 1,
-    division_id: 'A',
-    class_mode_id: 'morning',
-    academic_year_id: '2023-24',
-    teacher_id: 'tchr-001',
-    status: 'active',
-    created_at: '2023-06-01T08:00:00Z',
-    updated_at: '2023-06-01T08:00:00Z',
+    division_id: "A",
+    class_mode_id: "morning",
+    academic_year_id: "2023-24",
+    teacher_id: "tchr-001",
+    status: "active",
+    created_at: "2023-06-01T08:00:00Z",
+    updated_at: "2023-06-01T08:00:00Z",
   },
   {
-    id: '2',
+    id: "2",
     grade_id: 1,
-    division_id: 'B',
-    class_mode_id: 'morning',
-    academic_year_id: '2023-24',
-    teacher_id: 'tchr-002',
-    status: 'active',
-    created_at: '2023-06-01T08:00:00Z',
-    updated_at: '2023-06-01T08:00:00Z',
+    division_id: "B",
+    class_mode_id: "morning",
+    academic_year_id: "2023-24",
+    teacher_id: "tchr-002",
+    status: "active",
+    created_at: "2023-06-01T08:00:00Z",
+    updated_at: "2023-06-01T08:00:00Z",
   },
   {
-    id: '3',
+    id: "3",
     grade_id: 2,
-    division_id: 'A',
-    class_mode_id: 'morning',
-    academic_year_id: '2023-24',
-    teacher_id: 'tchr-003',
-    status: 'active',
-    created_at: '2023-06-01T08:00:00Z',
-    updated_at: '2023-06-01T08:00:00Z',
+    division_id: "A",
+    class_mode_id: "morning",
+    academic_year_id: "2023-24",
+    teacher_id: "tchr-003",
+    status: "active",
+    created_at: "2023-06-01T08:00:00Z",
+    updated_at: "2023-06-01T08:00:00Z",
   },
   {
-    id: '4',
+    id: "4",
     grade_id: 5,
-    division_id: 'A',
-    class_mode_id: 'evening',
-    academic_year_id: '2023-24',
-    teacher_id: 'tchr-004',
-    status: 'active',
-    created_at: '2023-06-01T08:00:00Z',
-    updated_at: '2023-06-01T08:00:00Z',
+    division_id: "A",
+    class_mode_id: "evening",
+    academic_year_id: "2023-24",
+    teacher_id: "tchr-004",
+    status: "active",
+    created_at: "2023-06-01T08:00:00Z",
+    updated_at: "2023-06-01T08:00:00Z",
   },
   {
-    id: '5',
+    id: "5",
     grade_id: 5,
-    division_id: 'B',
-    class_mode_id: 'evening',
-    academic_year_id: '2023-24',
-    teacher_id: 'tchr-005',
-    status: 'inactive',
-    created_at: '2023-06-01T08:00:00Z',
-    updated_at: '2023-06-01T08:00:00Z',
+    division_id: "B",
+    class_mode_id: "evening",
+    academic_year_id: "2023-24",
+    teacher_id: "tchr-005",
+    status: "inactive",
+    created_at: "2023-06-01T08:00:00Z",
+    updated_at: "2023-06-01T08:00:00Z",
   },
 ];
 
 export const subjectsData: Subject[] = [
   {
-    id: 'sub-001',
-    subject_name: 'Quran Recitation',
-    department_id: 'dept-001',
+    id: "sub-001",
+    subject_name: "Quran Recitation",
+    department_id: "dept-001",
   },
   {
-    id: 'sub-002',
-    subject_name: 'Tajweed',
-    department_id: 'dept-001',
+    id: "sub-002",
+    subject_name: "Tajweed",
+    department_id: "dept-001",
   },
   {
-    id: 'sub-003',
-    subject_name: 'Fiqh',
-    department_id: 'dept-002',
+    id: "sub-003",
+    subject_name: "Fiqh",
+    department_id: "dept-002",
   },
   {
-    id: 'sub-004',
-    subject_name: 'Hadith',
-    department_id: 'dept-002',
+    id: "sub-004",
+    subject_name: "Hadith",
+    department_id: "dept-002",
   },
   {
-    id: 'sub-005',
-    subject_name: 'Arabic Language',
-    department_id: 'dept-003',
+    id: "sub-005",
+    subject_name: "Arabic Language",
+    department_id: "dept-003",
   },
 ];
 
 export const subjectColumns: ColumnDef<Subject>[] = [
   {
-    accessorKey: 'id',
-    header: 'ID',
+    accessorKey: "id",
+    header: "ID",
   },
   {
-    accessorKey: 'subject_name',
-    header: 'Subject Name',
+    accessorKey: "subject_name",
+    header: "Subject Name",
   },
   {
-    accessorKey: 'department_id',
-    header: 'Department ID',
+    accessorKey: "department_id",
+    header: "Department ID",
   },
 ];
-
 
 export const batchColumns: ColumnDef<Batch>[] = [
   {
@@ -1258,5 +1285,22 @@ export const batchData: Batch[] = [
   {
     id: "4",
     batchName: "Special Batches",
+  },
+];
+
+export const departmentsData: Department[] = [
+  { id: "1", name: "Quran" },
+  { id: "2", name: "Hadith" },
+  { id: "3", name: "Fiqh" },
+];
+
+export const departmentsColumns: ColumnDef<Department>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "name",
+    header: "Department Name",
   },
 ];

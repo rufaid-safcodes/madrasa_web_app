@@ -70,7 +70,7 @@ const items = [
     list: [
       { name: "Manage Teachers", url: "/teachers" },
       { name: "Add Teacher", url: "/teachers/add-teachers" },
-      { name: "Departments", url: "/teachers/departments" },
+      { name: "Departments", url: "/departments" },
     ],
   },
   {
