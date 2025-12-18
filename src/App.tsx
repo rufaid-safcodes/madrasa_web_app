@@ -28,6 +28,9 @@ import AddSubjects from "./features/subjects/add/page"
 import EditSubject from "./features/subjects/edit/page"
 import ViewSubject from "./features/subjects/view/page"
 import Batches from "./features/batches/page"
+import AddBatch from "./features/batches/add/page"
+import EditBatch from "./features/batches/edit/page"
+import ViewBatch from "./features/batches/view/page"
 // import Batches from "./features/batches/page"
 
 function App() {
@@ -68,9 +71,9 @@ function App() {
 
               {/* batches */}
               <Route path="/batches" element={<Batches />} />
-              {/* <Route path="/batches/add-batches" element={<AddBatches />} /> */}
-              {/* <Route path="/batches/edit-batches/:id" element={<EditBatches />} /> */}
-              {/* <Route path="/batches/view-batches/:id" element={<ViewBatches />} /> */}
+              <Route path="/batchs/add-batchs" element={<AddBatch />} />
+              <Route path="/batchs/edit-batchs/:id" element={<EditBatch />} />
+              <Route path="/batchs/view-batchs/:id" element={<ViewBatch />} />
 
               {/* classrooms */}
               <Route path="/classrooms" element={<ClassRooms />} />
