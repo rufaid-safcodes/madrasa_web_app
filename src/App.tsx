@@ -40,6 +40,7 @@ import EditFeeSetting from "./features/feeSettings/edit/page"
 import ViewFeeSetting from "./features/feeSettings/view/page"
 import DueFees from "./features/dueFees/page"
 import Transactions from "./features/transactions/page"
+import ViewTransaction from "./features/transactions/view/page"
 // import Batches from "./features/batches/page"
 
 function App() {
@@ -109,7 +110,9 @@ function App() {
               <Route path="/staffs/view-staffs/:id" element={<ViewStaff />} />
 
               {/* Accounts and fees */}
-               <Route path="/transactions" element={<Transactions />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/transactions/view-transactions/:id" element={<ViewTransaction />} />
+              
               <Route path="/due-fees" element={<DueFees />} />
               
               <Route path="/fee-settings" element={<FeeSettings />} />

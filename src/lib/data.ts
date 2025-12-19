@@ -1510,7 +1510,7 @@ export const dueFeesColumns: ColumnDef<DueFee>[] = [
 ];
 
 // Transaction data type
-type Transaction = {
+export type Transaction = {
   id: string;
   date: string;
   name: string;
