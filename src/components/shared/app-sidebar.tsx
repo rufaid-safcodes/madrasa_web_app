@@ -8,6 +8,7 @@ import {
   Users2,
   Users2Icon,
   ChevronDown,
+  CreditCard,
 } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -84,12 +85,12 @@ const items = [
   },
   {
     title: "Accounts and Fees",
-    url: "/payments-and-fees",
-    icon: Calendar,
+    url: "/accounts",
+    icon: CreditCard,
     list: [
-      { name: "Due Fees", url: "/payments-and-fees/due-fees" },
-      { name: "Transactions", url: "/payments-and-fees/transactions" },
-      { name: "Fee Settings", url: "/payments-and-fees/fee-settings" },
+      { name: "Due Fees", url: "/accounts/due-fees" },
+      { name: "Transactions", url: "/accounts/transactions" },
+      { name: "Fee Settings", url: "/accounts/fee-settings" },
     ],
   },
   {

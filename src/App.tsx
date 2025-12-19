@@ -2,10 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/shared/app-sidebar"
 import { Toaster } from "@/components/ui/toaster"
-
 import Dashboard from "@/features/dashboard/page"
 import Attendance from "@/features/attendance/page"
-import Payments from "./features/payments/page"
+import Payments from "./features/accounts/page"
 import Staffs from "./features/staff/page"
 import Students from "./features/students/page"
 import Teachers from "./features/teachers/page"
@@ -103,6 +102,12 @@ function App() {
               <Route path="/staffs/edit-staffs/:id" element={<EditStaff />} />
               <Route path="/staffs/view-staffs/:id" element={<ViewStaff />} />
 
+              {/* Accounts and fees */}
+              
+              {/* <Route path="/due-fees" element={<DueFees />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/fee-settings" element={<FeeSettings />} /> */}
+              
             </Routes>
           </div>
         </main>
