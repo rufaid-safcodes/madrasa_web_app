@@ -1508,3 +1508,86 @@ export const dueFeesColumns: ColumnDef<DueFee>[] = [
     cell: ({ row }) => `$${row.original.totalDue.toFixed(2)}`
   }
 ];
+
+// Transaction data type
+type Transaction = {
+  id: string;
+  date: string;
+  name: string;
+  studentId: string;
+  amount: number;
+  paymentType: 'cash' | 'card';
+};
+
+// Transaction columns
+export const transactionColumns: ColumnDef<Transaction>[] = [
+  {
+    accessorKey: 'date',
+    header: 'Date',
+    cell: ({ row }) => row.original.date,
+  },
+  {
+    accessorKey: 'name',
+    header: 'Student Name',
+    cell: ({ row }) => row.original.name,
+  },
+  {
+    accessorKey: 'studentId',
+    header: 'Student ID',
+    cell: ({ row }) => row.original.studentId,
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => `$${row.original.amount.toFixed(2)}`,
+  },
+  {
+    accessorKey: 'paymentType',
+    header: 'Payment Type',
+    cell: ({ row }) => row.original.paymentType.charAt(0).toUpperCase() + row.original.paymentType.slice(1),
+  },
+];
+
+// Sample transaction data
+export const transactionData: Transaction[] = [
+  {
+    id: '1',
+    date: '2025-12-19',
+    name: 'Ahmed Khan',
+    studentId: 'STU001',
+    amount: 150.00,
+    paymentType: 'cash',
+  },
+  {
+    id: '2',
+    date: '2025-12-18',
+    name: 'Fatima Ali',
+    studentId: 'STU042',
+    amount: 200.00,
+    paymentType: 'card',
+  },
+  {
+    id: '3',
+    date: '2025-12-17',
+    name: 'Omar Hassan',
+    studentId: 'STU123',
+    amount: 175.50,
+    paymentType: 'cash',
+  },
+  {
+    id: '4',
+    date: '2025-12-16',
+    name: 'Aisha Mohammed',
+    studentId: 'STU087',
+    amount: 225.75,
+    paymentType: 'card',
+  },
+  {
+    id: '5',
+    date: '2025-12-15',
+    name: 'Yusuf Abdullah',
+    studentId: 'STU156',
+    amount: 190.25,
+    paymentType: 'cash',
+  },
+];

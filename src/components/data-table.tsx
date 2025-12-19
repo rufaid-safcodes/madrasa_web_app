@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   filterColumn?: string;
-  entityType?: "teacher" | "student" | "staff" | "classroom" | "subject" | "batch" | "department" | "feeSetting" | "dueFee";
+  entityType?: "teacher" | "student" | "staff" | "classroom" | "subject" | "batch" | "department" | "feeSetting" | "dueFee" | "transaction";
   onRemove?: (id: string) => Promise<void> | void;
   showActions?: {
     add?: boolean;
