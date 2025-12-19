@@ -40,6 +40,12 @@ interface DataTableProps<TData, TValue> {
   filterColumn?: string;
   entityType?: "teacher" | "student" | "staff" | "classroom" | "subject" | "batch" | "department" | "feeSetting" | "dueFee";
   onRemove?: (id: string) => Promise<void> | void;
+  showActions?: {
+    add?: boolean;
+    view?: boolean;
+    edit?: boolean;
+    remove?: boolean;
+  };
 }
 
 export function DataTable<TData extends { id: string }, TValue>({
@@ -48,6 +54,12 @@ export function DataTable<TData extends { id: string }, TValue>({
   filterColumn = "name",
   entityType = "teacher", // default to 'teacher' for backward compatibility
   onRemove,
+  showActions = {
+    add: true,
+    view: true,
+    edit: true,
+    remove: true
+  },
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -117,19 +129,21 @@ export function DataTable<TData extends { id: string }, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
         {/* Add New Entity Button */}
-        <Button
-          variant="outline"
-          className="capitalize"
-          onClick={() =>
-            navigate(
-              `/${
-                entityType === "classroom" ? "classrooms" : `${entityType}s`
-              }/add-${entityType}${entityType === "classroom" ? "" : "s"}`
-            )
-          }
-        >
-          Add {entityType}
-        </Button>
+        {showActions.add !== false && (
+          <Button
+            variant="outline"
+            className="capitalize"
+            onClick={() =>
+              navigate(
+                `/${
+                  entityType === "classroom" ? "classrooms" : `${entityType}s`
+                }/add-${entityType}${entityType === "classroom" ? "" : "s"}`
+              )
+            }
+          >
+            Add {entityType}
+          </Button>
+        )}
       </div>
 
       {/* Table */}
@@ -212,70 +226,76 @@ export function DataTable<TData extends { id: string }, TValue>({
                       </TableCell>
                     ))}
 
-                  {/* Actions Cell - Always visible */}
-                  <TableCell className="text-right">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                          <span className="sr-only">Open menu</span>
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem
-                          onClick={() =>
-                            navigate(
-                              `/${
-                                entityType === "classroom"
-                                  ? "classrooms"
-                                  : `${entityType}s`
-                              }/view-${entityType}${
-                                entityType === "classroom" ? "" : "s"
-                              }/${row.original.id}`
-                            )
-                          }
-                        >
-                          View details
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() =>
-                            navigate(
-                              `/${
-                                entityType === "classroom"
-                                  ? "classrooms"
-                                  : `${entityType}s`
-                              }/edit-${entityType}${
-                                entityType === "classroom" ? "" : "s"
-                              }/${row.original.id}`
-                            )
-                          }
-                        >
-                          Edit {entityType}
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className="text-red-600 hover:text-white! hover:bg-[#151529]!"
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            if (
-                              window.confirm(
-                                `Are you sure you want to remove this ${entityType}?`
-                              )
-                            ) {
-                              try {
-                                if (onRemove) {
-                                  await onRemove(row.original.id);
-                                }
-                              } catch (error) {
-                                console.error("Error removing teacher:", error);
+                  {/* Actions Cell - Conditionally visible */}
+                  {(showActions.view || showActions.edit || showActions.remove) && (
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" className="h-8 w-8 p-0">
+                            <span className="sr-only">Open menu</span>
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          {showActions.view !== false && (
+                            <DropdownMenuItem
+                              onClick={() =>
+                                navigate(
+                                  `/${
+                                    entityType === "classroom"
+                                      ? "classrooms"
+                                      : `${entityType}s`
+                                  }/view-${entityType}${
+                                    entityType === "classroom" ? "" : "s"
+                                  }/${row.original.id}`
+                                )
                               }
-                            }
-                          }}
-                        >
-                          Remove {entityType}
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
+                            >
+                              View details
+                            </DropdownMenuItem>
+                          )}
+                          {showActions.edit !== false && (
+                            <DropdownMenuItem
+                              onClick={() =>
+                                navigate(
+                                  `/${
+                                    entityType === "classroom"
+                                      ? "classrooms"
+                                      : `${entityType}s`
+                                  }/edit-${entityType}${
+                                    entityType === "classroom" ? "" : "s"
+                                  }/${row.original.id}`
+                                )
+                              }
+                            >
+                              Edit {entityType}
+                            </DropdownMenuItem>
+                          )}
+                          {showActions.remove !== false && onRemove && (
+                            <DropdownMenuItem
+                              className="text-red-600 hover:text-white! hover:bg-[#151529]!"
+                              onClick={async (e) => {
+                                e.stopPropagation();
+                                if (
+                                  window.confirm(
+                                    `Are you sure you want to remove this ${entityType}?`
+                                  )
+                                ) {
+                                  try {
+                                    await onRemove(row.original.id);
+                                  } catch (error) {
+                                    console.error(`Error removing ${entityType}:`, error);
+                                  }
+                                }
+                              }}
+                            >
+                              Remove {entityType}
+                            </DropdownMenuItem>
+                          )}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  )}
                 </TableRow>
               ))
             ) : (
