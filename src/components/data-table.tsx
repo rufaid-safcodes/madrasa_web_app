@@ -132,7 +132,7 @@ export function DataTable<TData extends { id: string }, TValue>({
         {showActions.add !== false && (
           <Button
             variant="outline"
-            className="capitalize"
+            className="capitalize bg-[#151529] text-white cursor-pointer"
             onClick={() =>
               navigate(
                 `/${
