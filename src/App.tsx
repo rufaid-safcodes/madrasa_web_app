@@ -41,7 +41,7 @@ import ViewFeeSetting from "./features/feeSettings/view/page"
 import DueFees from "./features/dueFees/page"
 import Transactions from "./features/transactions/page"
 import ViewTransaction from "./features/transactions/view/page"
-// import Batches from "./features/batches/page"
+import ViewDueFees from "./features/dueFees/view/page"
 
 function App() {
   return (
@@ -114,6 +114,7 @@ function App() {
               <Route path="/transactions/view-transactions/:id" element={<ViewTransaction />} />
               
               <Route path="/due-fees" element={<DueFees />} />
+              <Route path="/dueFees/view-dueFees/:id" element={<ViewDueFees />} />
               
               <Route path="/fee-settings" element={<FeeSettings />} />
               <Route path="/feeSettings/add-feeSettings" element={<AddFeeSetting />} />
