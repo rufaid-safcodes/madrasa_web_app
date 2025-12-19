@@ -22,7 +22,7 @@ export function DueFees() {
             add: false,
             view: true,
             edit: false,
-            remove: true,
+            remove: false,
           }}
           onRemove={async (id) => {
             // TODO: Replace with your actual API call
