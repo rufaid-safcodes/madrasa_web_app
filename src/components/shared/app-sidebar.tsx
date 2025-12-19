@@ -88,9 +88,9 @@ const items = [
     url: "/accounts",
     icon: CreditCard,
     list: [
-      { name: "Due Fees", url: "/accounts/due-fees" },
-      { name: "Transactions", url: "/accounts/transactions" },
-      { name: "Fee Settings", url: "/accounts/fee-settings" },
+      { name: "Due Fees", url: "/due-fees" },
+      { name: "Transactions", url: "/transactions" },
+      { name: "Fee Settings", url: "/fee-settings" },
     ],
   },
   {

@@ -60,6 +60,14 @@ export type Department = {
   name: string;
 };
 
+export type FeeSetting = {
+  id: string;
+  classroom_id: string;
+  amount: number;
+  academic_year_id: string;
+};
+
+
 export const teachersData: User[] = [
   {
     id: "1",
@@ -1302,5 +1310,58 @@ export const departmentsColumns: ColumnDef<Department>[] = [
   {
     accessorKey: "name",
     header: "Department Name",
+  },
+];
+
+export const feeSettingsColumns: ColumnDef<FeeSetting>[] = [
+  {
+    accessorKey: "id",
+    header: "ID",
+  },
+  {
+    accessorKey: "classroom_id",
+    header: "Classroom",
+  },
+  {
+    accessorKey: "amount",
+    header: "Amount",
+  },
+  {
+    accessorKey: "academic_year_id",
+    header: "Academic Year",
+  },
+];
+
+
+export const feeSettingsData: FeeSetting[] = [
+  { 
+    id: "1", 
+    classroom_id: "class_1", 
+    amount: 100.00, 
+    academic_year_id: "2023-2024" 
+  },
+  { 
+    id: "2", 
+    classroom_id: "class_2", 
+    amount: 120.00, 
+    academic_year_id: "2023-2024" 
+  },
+  { 
+    id: "3", 
+    classroom_id: "class_3", 
+    amount: 140.00, 
+    academic_year_id: "2023-2024" 
+  },
+  { 
+    id: "4", 
+    classroom_id: "class_4", 
+    amount: 160.00, 
+    academic_year_id: "2023-2024" 
+  },
+  { 
+    id: "5", 
+    classroom_id: "class_5", 
+    amount: 180.00, 
+    academic_year_id: "2023-2024" 
   },
 ];

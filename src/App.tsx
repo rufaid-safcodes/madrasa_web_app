@@ -34,6 +34,10 @@ import Departments from "./features/departments/page"
 import AddDepartment from "./features/departments/add/page"
 import EditDepartment from "./features/departments/edit/page"
 import ViewDepartment from "./features/departments/view/page"
+import FeeSettings from "./features/feeSettings/page"
+import AddFeeSetting from "./features/feeSettings/add/page"
+import EditFeeSetting from "./features/feeSettings/edit/page"
+import ViewFeeSetting from "./features/feeSettings/view/page"
 // import Batches from "./features/batches/page"
 
 function App() {
@@ -105,8 +109,11 @@ function App() {
               {/* Accounts and fees */}
               
               {/* <Route path="/due-fees" element={<DueFees />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/fee-settings" element={<FeeSettings />} /> */}
+              <Route path="/transactions" element={<Transactions />} /> */}
+              <Route path="/fee-settings" element={<FeeSettings />} />
+              <Route path="/feeSettings/add-feeSettings" element={<AddFeeSetting />} />
+              <Route path="/feeSettings/edit-feeSettings/:id" element={<EditFeeSetting />} />
+              <Route path="/feeSettings/view-feeSettings/:id" element={<ViewFeeSetting />} />
               
             </Routes>
           </div>
