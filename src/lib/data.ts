@@ -30,6 +30,9 @@ export type Student = {
   department: string;
   qualification: string;
   joining_date: string; // Date in ISO format (YYYY-MM-DD)
+  class?: string; // New field for class
+  sibling_id?: string; // New field for sibling ID
+  fees_due?: string[]; // New field for due fees (e.g., ['jan', 'feb', 'mar', 'apr'])
 };
 
 export type Classroom = {
@@ -56,7 +59,7 @@ export type Batch = {
 };
 
 export type Department = {
-  id: string;  // Changed from number to string
+  id: string; // Changed from number to string
   name: string;
 };
 
@@ -574,6 +577,9 @@ export const studentsData: Student[] = [
     department: "Quran",
     qualification: "Hafiz",
     joining_date: "2023-09-01",
+    class: "4A",
+    sibling_id: "STU2023010",
+    fees_due: ["jan", "feb", "mar", "apr"],
   },
   {
     id: "2",
@@ -591,6 +597,9 @@ export const studentsData: Student[] = [
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
+    class: "3B",
+    sibling_id: "STU2023011",
+    fees_due: ["feb", "mar", "apr"],
   },
   {
     id: "3",
@@ -608,6 +617,9 @@ export const studentsData: Student[] = [
     department: "Quran",
     qualification: "Student",
     joining_date: "2023-09-01",
+    class: "5A",
+    sibling_id: "STU2023012",
+    fees_due: ["mar", "apr"],
   },
   {
     id: "4",
@@ -625,448 +637,209 @@ export const studentsData: Student[] = [
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
+    class: "4C",
+    sibling_id: "STU2023013",
+    fees_due: ["apr"],
   },
   {
     id: "5",
-    admission_no: "STU2022001",
-    first_name: "Ahmed",
-    last_name: "Ibrahim",
+    admission_no: "STU2023005",
+    first_name: "Hassan",
+    last_name: "Saleh",
     gender: "male",
-    dob: "2014-09-25",
-    phone: "501234568",
-    guardian_name: "Ibrahim Mohammed",
-    address: "654 Al Barsha, Dubai",
-    admission_date: "2022-09-01",
-    status: "graduated",
-    academic_year_id: "2",
+    dob: "2015-02-08",
+    phone: "561234567",
+    guardian_name: "Saleh Hassan",
+    address: "22 Al Nahda St, Dubai",
+    admission_date: "2023-09-01",
+    status: "active",
+    academic_year_id: "1",
     department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2022-09-01",
+    qualification: "Student",
+    joining_date: "2023-09-01",
+    class: "4B",
+    sibling_id: "STU2023014",
+    fees_due: ["jan", "feb"],
   },
   {
     id: "6",
     admission_no: "STU2023006",
-    first_name: "Mariam",
-    last_name: "Omar",
+    first_name: "Maryam",
+    last_name: "Saeed",
     gender: "female",
-    dob: "2016-09-05",
-    phone: "561234567",
-    guardian_name: "Omar Khalid",
-    address: "987 Corniche Rd, Abu Dhabi",
+    dob: "2016-01-30",
+    phone: "571234567",
+    guardian_name: "Saeed Abdullah",
+    address: "88 Al Barsha, Dubai",
     admission_date: "2023-09-01",
-    status: "inactive",
+    status: "active",
     academic_year_id: "1",
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
+    class: "3A",
+    sibling_id: "STU2023015",
+    fees_due: ["feb", "mar"],
   },
   {
     id: "7",
     admission_no: "STU2023007",
-    first_name: "Khalid",
-    last_name: "Hassan",
+    first_name: "Abdullah",
+    last_name: "Nasser",
     gender: "male",
-    dob: "2015-12-12",
-    phone: "571234567",
-    guardian_name: "Hassan Ahmed",
-    address: "159 Al Bateen St, Abu Dhabi",
+    dob: "2014-12-14",
+    phone: "541234567",
+    guardian_name: "Nasser Abdullah",
+    address: "14 Al Qusais, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Quran",
     qualification: "Hafiz",
     joining_date: "2023-09-01",
+    class: "6A",
+    sibling_id: "STU2023016",
+    fees_due: ["jan", "feb", "mar"],
   },
   {
     id: "8",
     admission_no: "STU2023008",
-    first_name: "Layla",
-    last_name: "Mohammed",
+    first_name: "Zainab",
+    last_name: "Hameed",
     gender: "female",
-    dob: "2016-03-30",
-    phone: "591234567",
-    guardian_name: "Mohammed Ali",
-    address: "753 Al Nahyan St, Abu Dhabi",
+    dob: "2016-09-05",
+    phone: "531234567",
+    guardian_name: "Hameed Ali",
+    address: "55 Deira, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
+    class: "3C",
+    sibling_id: "STU2023017",
+    fees_due: ["mar"],
   },
   {
     id: "9",
-    admission_no: "STU2023007",
-    first_name: "Khalid",
-    last_name: "Abdullah",
+    admission_no: "STU2023009",
+    first_name: "Yusuf",
+    last_name: "Rahman",
     gender: "male",
-    dob: "2015-04-12",
-    phone: "501234570",
-    guardian_name: "Abdullah Khalid",
-    address: "246 Al Barsha, Dubai",
+    dob: "2015-06-21",
+    phone: "591234567",
+    guardian_name: "Rahman Yusuf",
+    address: "90 Al Warqa, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Quran",
-    qualification: "Hafiz",
+    qualification: "Student",
     joining_date: "2023-09-01",
+    class: "5B",
+    sibling_id: "STU2023018",
+    fees_due: ["apr"],
   },
   {
     id: "10",
-    admission_no: "STU2023005",
-    first_name: "Yusuf",
-    last_name: "Ibrahim",
-    gender: "male",
-    dob: "2015-02-25",
-    phone: "541234567",
-    guardian_name: "Ibrahim Ali",
-    address: "654 Al Falah St, Abu Dhabi",
+    admission_no: "STU2023010",
+    first_name: "Khadija",
+    last_name: "Mustafa",
+    gender: "female",
+    dob: "2016-03-11",
+    phone: "501987654",
+    guardian_name: "Mustafa Ibrahim",
+    address: "12 Muhaisnah, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
+    department: "Islamic Studies",
+    qualification: "Student",
     joining_date: "2023-09-01",
+    class: "4A",
+    sibling_id: "STU2023001",
+    fees_due: ["jan", "feb"],
   },
   {
     id: "11",
     admission_no: "STU2023011",
-    first_name: "Abdullah",
-    last_name: "Mohammed",
+    first_name: "Bilal",
+    last_name: "Farooq",
     gender: "male",
-    dob: "2015-06-18",
-    phone: "551234568",
-    guardian_name: "Mohammed Ali",
-    address: "111 Al Karama, Dubai",
+    dob: "2015-08-19",
+    phone: "551987654",
+    guardian_name: "Farooq Ahmed",
+    address: "67 Karama, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Quran",
-    qualification: "Hafiz",
+    qualification: "Student",
     joining_date: "2023-09-01",
+    class: "4C",
+    sibling_id: "STU2023002",
+    fees_due: ["feb", "mar"],
   },
   {
     id: "12",
     admission_no: "STU2023012",
-    first_name: "Amina",
-    last_name: "Omar",
+    first_name: "Safiya",
+    last_name: "Latif",
     gender: "female",
-    dob: "2016-01-22",
-    phone: "521234568",
-    guardian_name: "Omar Khalid",
-    address: "222 Al Qusais, Dubai",
+    dob: "2016-10-02",
+    phone: "521987654",
+    guardian_name: "Latif Khan",
+    address: "101 Bur Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
+    class: "3B",
+    sibling_id: "STU2023003",
+    fees_due: ["mar", "apr"],
   },
   {
     id: "13",
     admission_no: "STU2023013",
     first_name: "Ibrahim",
-    last_name: "Yousef",
+    last_name: "Zayed",
     gender: "male",
-    dob: "2015-08-14",
-    phone: "581234568",
-    guardian_name: "Yousef Ahmed",
-    address: "333 Al Nahda, Sharjah",
+    dob: "2014-04-27",
+    phone: "581987654",
+    guardian_name: "Zayed Ibrahim",
+    address: "44 Mirdif, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Quran",
     qualification: "Hafiz",
     joining_date: "2023-09-01",
+    class: "6B",
+    sibling_id: "STU2023004",
+    fees_due: ["jan"],
   },
   {
     id: "14",
     admission_no: "STU2023014",
-    first_name: "Zainab",
-    last_name: "Khalid",
-    gender: "female",
-    dob: "2016-04-30",
-    phone: "561234568",
-    guardian_name: "Khalid Omar",
-    address: "444 Al Majaz, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "15",
-    admission_no: "STU2023015",
-    first_name: "Omar",
-    last_name: "Ahmed",
-    gender: "male",
-    dob: "2015-11-05",
-    phone: "501234571",
-    guardian_name: "Ahmed Ali",
-    address: "555 Al Qasba, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "16",
-    admission_no: "STU2023016",
-    first_name: "Huda",
-    last_name: "Mohammed",
-    gender: "female",
-    dob: "2016-07-12",
-    phone: "551234569",
-    guardian_name: "Mohammed Hassan",
-    address: "666 Al Khan, Ajman",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "17",
-    admission_no: "STU2023017",
-    first_name: "Yousef",
-    last_name: "Abdul",
-    gender: "male",
-    dob: "2015-09-23",
-    phone: "521234569",
-    guardian_name: "Abdul Rahman",
-    address: "777 Al Jurf, Ajman",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "18",
-    admission_no: "STU2023018",
-    first_name: "Layla",
-    last_name: "Kareem",
-    gender: "female",
-    dob: "2016-02-17",
-    phone: "581234569",
-    guardian_name: "Kareem Ahmed",
-    address: "888 Al Hamra, Ras Al Khaimah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "19",
-    admission_no: "STU2023019",
-    first_name: "Khalid",
-    last_name: "Nasser",
-    gender: "male",
-    dob: "2015-12-08",
-    phone: "561234569",
-    guardian_name: "Nasser Ali",
-    address: "999 Al Dhaid, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "20",
-    admission_no: "STU2023020",
-    first_name: "Aisha",
-    last_name: "Tariq",
-    gender: "female",
-    dob: "2016-06-19",
-    phone: "501234572",
-    guardian_name: "Tariq Mohammed",
-    address: "1010 Al Qusaidat, Fujairah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "21",
-    admission_no: "STU2023021",
-    first_name: "Mohammed",
-    last_name: "Saif",
-    gender: "male",
-    dob: "2015-10-11",
-    phone: "551234570",
-    guardian_name: "Saif Ahmed",
-    address: "1111 Al Aqah, Fujairah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "22",
-    admission_no: "STU2023022",
-    first_name: "Fatima",
-    last_name: "Majid",
-    gender: "female",
-    dob: "2016-03-25",
-    phone: "521234570",
-    guardian_name: "Majid Omar",
-    address: "1212 Al Madam, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "23",
-    admission_no: "STU2023023",
-    first_name: "Omar",
-    last_name: "Faisal",
-    gender: "male",
-    dob: "2015-07-16",
-    phone: "581234570",
-    guardian_name: "Faisal Khalid",
-    address: "1313 Al Dhaid Road, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "24",
-    admission_no: "STU2023024",
-    first_name: "Mariam",
-    last_name: "Waleed",
-    gender: "female",
-    dob: "2016-01-09",
-    phone: "561234570",
-    guardian_name: "Waleed Ali",
-    address: "1414 Al Qasimia, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "25",
-    admission_no: "STU2023025",
-    first_name: "Ahmed",
-    last_name: "Hamad",
-    gender: "male",
-    dob: "2015-05-27",
-    phone: "501234573",
-    guardian_name: "Hamad Khalifa",
-    address: "1515 Al Taawun, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "26",
-    admission_no: "STU2023026",
-    first_name: "Aisha",
-    last_name: "Sultan",
-    gender: "female",
-    dob: "2016-08-14",
-    phone: "551234571",
-    guardian_name: "Sultan Mohammed",
-    address: "1616 Al Majaz, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "27",
-    admission_no: "STU2023027",
-    first_name: "Khalid",
-    last_name: "Rashid",
-    gender: "male",
-    dob: "2015-11-30",
-    phone: "521234571",
-    guardian_name: "Rashid Ahmed",
-    address: "1717 Al Khan, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "28",
-    admission_no: "STU2023028",
     first_name: "Noor",
-    last_name: "Hassan",
+    last_name: "Anwar",
     gender: "female",
-    dob: "2016-05-22",
-    phone: "581234571",
-    guardian_name: "Hassan Ali",
-    address: "1818 Al Nahda, Sharjah",
+    dob: "2016-12-09",
+    phone: "591987654",
+    guardian_name: "Anwar Mahmood",
+    address: "73 Discovery Gardens, Dubai",
     admission_date: "2023-09-01",
     status: "active",
     academic_year_id: "1",
     department: "Islamic Studies",
     qualification: "Student",
     joining_date: "2023-09-01",
-  },
-  {
-    id: "29",
-    admission_no: "STU2023029",
-    first_name: "Yousef",
-    last_name: "Ibrahim",
-    gender: "male",
-    dob: "2015-09-03",
-    phone: "561234571",
-    guardian_name: "Ibrahim Khalid",
-    address: "1919 Al Qasba, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Quran",
-    qualification: "Hafiz",
-    joining_date: "2023-09-01",
-  },
-  {
-    id: "30",
-    admission_no: "STU2023030",
-    first_name: "Sarah",
-    last_name: "Omar",
-    gender: "female",
-    dob: "2016-02-28",
-    phone: "501234574",
-    guardian_name: "Omar Nasser",
-    address: "2020 Al Majaz, Sharjah",
-    admission_date: "2023-09-01",
-    status: "active",
-    academic_year_id: "1",
-    department: "Islamic Studies",
-    qualification: "Student",
-    joining_date: "2023-09-01",
+    class: "2A",
+    sibling_id: "STU2023005",
+    fees_due: ["feb", "mar", "apr"],
   },
 ];
 
@@ -1083,20 +856,24 @@ export const studentColumns: ColumnDef<Student>[] = [
     },
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
+    accessorKey: "class",
+    header: "Class",
   },
   {
-    accessorKey: "guardian_name",
-    header: "Guardian Name",
+    accessorKey: "sibling_id",
+    header: "Sibling ID",
   },
   {
-    accessorKey: "joining_date",
-    header: "Joining Date",
+    accessorKey: "fees_due",
+    header: "Fees Due",
     cell: ({ row }) => {
-      return new Date(row.original.joining_date).toLocaleDateString();
+      const fees = row.original.fees_due || [];
+      if (fees.length === 0) return "None";
+      if (fees.length <= 2) return fees.join(", ");
+      return `${fees[0]}, ${fees[1]} +${fees.length - 2} months`;
     },
   },
+
   {
     accessorKey: "status",
     header: "Status",
@@ -1344,35 +1121,35 @@ export const feeSettingsColumns: ColumnDef<FeeSetting>[] = [
 ];
 
 export const feeSettingsData: FeeSetting[] = [
-  { 
-    id: "1", 
-    classroom_id: "class_1", 
-    amount: 100.00, 
-    academic_year_id: "2023-2024" 
+  {
+    id: "1",
+    classroom_id: "class_1",
+    amount: 100.0,
+    academic_year_id: "2023-2024",
   },
-  { 
-    id: "2", 
-    classroom_id: "class_2", 
-    amount: 120.00, 
-    academic_year_id: "2023-2024" 
+  {
+    id: "2",
+    classroom_id: "class_2",
+    amount: 120.0,
+    academic_year_id: "2023-2024",
   },
-  { 
-    id: "3", 
-    classroom_id: "class_3", 
-    amount: 140.00, 
-    academic_year_id: "2023-2024" 
+  {
+    id: "3",
+    classroom_id: "class_3",
+    amount: 140.0,
+    academic_year_id: "2023-2024",
   },
-  { 
-    id: "4", 
-    classroom_id: "class_4", 
-    amount: 160.00, 
-    academic_year_id: "2023-2024" 
+  {
+    id: "4",
+    classroom_id: "class_4",
+    amount: 160.0,
+    academic_year_id: "2023-2024",
   },
-  { 
-    id: "5", 
-    classroom_id: "class_5", 
-    amount: 180.00, 
-    academic_year_id: "2023-2024" 
+  {
+    id: "5",
+    classroom_id: "class_5",
+    amount: 180.0,
+    academic_year_id: "2023-2024",
   },
 ];
 
@@ -1386,7 +1163,7 @@ export const dueFeesData: DueFee[] = [
     feeAmount: 100,
     dueMonths: 3, // Will show next 3 months from last paid
     lastPaidDate: "2023-11-30", // Last paid for November
-    totalDue: 300
+    totalDue: 300,
   },
   {
     id: "df2",
@@ -1396,7 +1173,7 @@ export const dueFeesData: DueFee[] = [
     feeAmount: 120,
     dueMonths: 2, // Will show 2 months from last paid
     lastPaidDate: "2023-10-31", // Last paid for October
-    totalDue: 240
+    totalDue: 240,
   },
   {
     id: "df3",
@@ -1407,7 +1184,7 @@ export const dueFeesData: DueFee[] = [
     feeAmount: 110,
     dueMonths: 4, // Will show 4 months from last paid
     lastPaidDate: "2023-09-30", // Last paid for September
-    totalDue: 440
+    totalDue: 440,
   },
   {
     id: "df4",
@@ -1417,7 +1194,7 @@ export const dueFeesData: DueFee[] = [
     feeAmount: 130,
     dueMonths: 1, // Will show 1 month from last paid
     lastPaidDate: "2023-12-15", // Recently paid, only 1 month due
-    totalDue: 130
+    totalDue: 130,
   },
   {
     id: "df5",
@@ -1428,8 +1205,8 @@ export const dueFeesData: DueFee[] = [
     feeAmount: 140,
     dueMonths: 5, // Will show 5 months from last paid
     lastPaidDate: "2023-08-31", // Last paid for August
-    totalDue: 700
-  }
+    totalDue: 700,
+  },
 ];
 
 export const dueFeesColumns: ColumnDef<DueFee>[] = [
@@ -1448,55 +1225,70 @@ export const dueFeesColumns: ColumnDef<DueFee>[] = [
   {
     accessorKey: "siblingId",
     header: "Sibling ID",
-    cell: ({ row }) => row.original.siblingId || "-"
+    cell: ({ row }) => row.original.siblingId || "-",
   },
   {
     accessorKey: "feeAmount",
     header: "Monthly Fee",
-    cell: ({ row }) => `$${row.original.feeAmount.toFixed(2)}`
+    cell: ({ row }) => `$${row.original.feeAmount.toFixed(2)}`,
   },
   {
     accessorKey: "dueMonths",
     header: "Due Months",
     cell: ({ row }) => {
-      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
       const lastPaidDate = row.original.lastPaidDate;
       const dueMonths = row.original.dueMonths;
-      
+
       if (!lastPaidDate) {
-        return 'N/A'; // or any other fallback you prefer
+        return "N/A"; // or any other fallback you prefer
       }
-      
+
       const lastPaid = new Date(lastPaidDate);
       // Get the month after the last paid month
       let startMonth = lastPaid.getMonth() + 1; // +1 because we want the next month
       let startYear = lastPaid.getFullYear();
-      
+
       // Handle December to January transition
       if (startMonth > 11) {
         startMonth = 0; // January
         startYear++;
       }
-      
+
       // Get the due months starting from the month after last paid
       const monthNames = [];
       for (let i = 0; i < dueMonths; i++) {
         const monthIndex = (startMonth + i) % 12;
         const year = startYear + Math.floor((startMonth + i) / 12);
         monthNames.push(months[monthIndex]);
-        
+
         // Only show the year if it's different from current year and not already shown
         if (year !== startYear) {
           monthNames[monthNames.length - 1] += ` '${year.toString().slice(-2)}`;
         }
       }
-      
+
       // Format as "Feb, Mar + 1 more" if more than 2 months
       if (monthNames.length > 2) {
-        return `${monthNames[0]}, ${monthNames[1]} + ${monthNames.length - 2} more`;
+        return `${monthNames[0]}, ${monthNames[1]} + ${
+          monthNames.length - 2
+        } more`;
       }
       return monthNames.join(", ");
-    }
+    },
   },
   {
     accessorKey: "lastPaidDate",
@@ -1505,8 +1297,8 @@ export const dueFeesColumns: ColumnDef<DueFee>[] = [
   {
     accessorKey: "totalDue",
     header: "Total Due",
-    cell: ({ row }) => `$${row.original.totalDue.toFixed(2)}`
-  }
+    cell: ({ row }) => `$${row.original.totalDue.toFixed(2)}`,
+  },
 ];
 
 // Transaction data type
@@ -1516,78 +1308,80 @@ export type Transaction = {
   name: string;
   studentId: string;
   amount: number;
-  paymentType: 'cash' | 'card';
+  paymentType: "cash" | "card";
 };
 
 // Transaction columns
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
-    accessorKey: 'date',
-    header: 'Date',
+    accessorKey: "date",
+    header: "Date",
     cell: ({ row }) => row.original.date,
   },
   {
-    accessorKey: 'name',
-    header: 'Student Name',
+    accessorKey: "name",
+    header: "Student Name",
     cell: ({ row }) => row.original.name,
   },
   {
-    accessorKey: 'studentId',
-    header: 'Student ID',
+    accessorKey: "studentId",
+    header: "Student ID",
     cell: ({ row }) => row.original.studentId,
   },
   {
-    accessorKey: 'amount',
-    header: 'Amount',
+    accessorKey: "amount",
+    header: "Amount",
     cell: ({ row }) => `$${row.original.amount.toFixed(2)}`,
   },
   {
-    accessorKey: 'paymentType',
-    header: 'Payment Type',
-    cell: ({ row }) => row.original.paymentType.charAt(0).toUpperCase() + row.original.paymentType.slice(1),
+    accessorKey: "paymentType",
+    header: "Payment Type",
+    cell: ({ row }) =>
+      row.original.paymentType.charAt(0).toUpperCase() +
+      row.original.paymentType.slice(1),
   },
 ];
 
 // Sample transaction data
 export const transactionData: Transaction[] = [
   {
-    id: '1',
-    date: '2025-12-19',
-    name: 'Ahmed Khan',
-    studentId: 'STU001',
-    amount: 150.00,
-    paymentType: 'cash',
+    id: "1",
+    date: "2025-12-19",
+    name: "Ahmed Khan",
+    studentId: "STU001",
+    amount: 150.0,
+    paymentType: "cash",
   },
   {
-    id: '2',
-    date: '2025-12-18',
-    name: 'Fatima Ali',
-    studentId: 'STU042',
-    amount: 200.00,
-    paymentType: 'card',
+    id: "2",
+    date: "2025-12-18",
+    name: "Fatima Ali",
+    studentId: "STU042",
+    amount: 200.0,
+    paymentType: "card",
   },
   {
-    id: '3',
-    date: '2025-12-17',
-    name: 'Omar Hassan',
-    studentId: 'STU123',
-    amount: 175.50,
-    paymentType: 'cash',
+    id: "3",
+    date: "2025-12-17",
+    name: "Omar Hassan",
+    studentId: "STU123",
+    amount: 175.5,
+    paymentType: "cash",
   },
   {
-    id: '4',
-    date: '2025-12-16',
-    name: 'Aisha Mohammed',
-    studentId: 'STU087',
+    id: "4",
+    date: "2025-12-16",
+    name: "Aisha Mohammed",
+    studentId: "STU087",
     amount: 225.75,
-    paymentType: 'card',
+    paymentType: "card",
   },
   {
-    id: '5',
-    date: '2025-12-15',
-    name: 'Yusuf Abdullah',
-    studentId: 'STU156',
+    id: "5",
+    date: "2025-12-15",
+    name: "Yusuf Abdullah",
+    studentId: "STU156",
     amount: 190.25,
-    paymentType: 'cash',
+    paymentType: "cash",
   },
 ];
