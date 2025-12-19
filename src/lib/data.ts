@@ -67,6 +67,17 @@ export type FeeSetting = {
   academic_year_id: string;
 };
 
+export type DueFee = {
+  id: string;
+  studentId: string;
+  studentName: string;
+  className: string;
+  siblingId?: string;
+  feeAmount: number;
+  dueMonths: number;
+  lastPaidDate?: string;
+  totalDue: number;
+};
 
 export const teachersData: User[] = [
   {
@@ -1332,7 +1343,6 @@ export const feeSettingsColumns: ColumnDef<FeeSetting>[] = [
   },
 ];
 
-
 export const feeSettingsData: FeeSetting[] = [
   { 
     id: "1", 
@@ -1364,4 +1374,137 @@ export const feeSettingsData: FeeSetting[] = [
     amount: 180.00, 
     academic_year_id: "2023-2024" 
   },
+];
+
+export const dueFeesData: DueFee[] = [
+  {
+    id: "df1",
+    studentId: "1",
+    studentName: "Mohammed Ali",
+    className: "Class 1A",
+    siblingId: "2",
+    feeAmount: 100,
+    dueMonths: 3, // Will show next 3 months from last paid
+    lastPaidDate: "2023-11-30", // Last paid for November
+    totalDue: 300
+  },
+  {
+    id: "df2",
+    studentId: "3",
+    studentName: "Ahmed Khan",
+    className: "Class 2B",
+    feeAmount: 120,
+    dueMonths: 2, // Will show 2 months from last paid
+    lastPaidDate: "2023-10-31", // Last paid for October
+    totalDue: 240
+  },
+  {
+    id: "df3",
+    studentId: "5",
+    studentName: "Fatima Ahmed",
+    className: "Class 3A",
+    siblingId: "7",
+    feeAmount: 110,
+    dueMonths: 4, // Will show 4 months from last paid
+    lastPaidDate: "2023-09-30", // Last paid for September
+    totalDue: 440
+  },
+  {
+    id: "df4",
+    studentId: "8",
+    studentName: "Yusuf Abdullah",
+    className: "Class 4B",
+    feeAmount: 130,
+    dueMonths: 1, // Will show 1 month from last paid
+    lastPaidDate: "2023-12-15", // Recently paid, only 1 month due
+    totalDue: 130
+  },
+  {
+    id: "df5",
+    studentId: "10",
+    studentName: "Aisha Mohammed",
+    className: "Class 5A",
+    siblingId: "12",
+    feeAmount: 140,
+    dueMonths: 5, // Will show 5 months from last paid
+    lastPaidDate: "2023-08-31", // Last paid for August
+    totalDue: 700
+  }
+];
+
+export const dueFeesColumns: ColumnDef<DueFee>[] = [
+  {
+    accessorKey: "studentId",
+    header: "Student ID",
+  },
+  {
+    accessorKey: "studentName",
+    header: "Student Name",
+  },
+  {
+    accessorKey: "className",
+    header: "Class",
+  },
+  {
+    accessorKey: "siblingId",
+    header: "Sibling ID",
+    cell: ({ row }) => row.original.siblingId || "-"
+  },
+  {
+    accessorKey: "feeAmount",
+    header: "Monthly Fee",
+    cell: ({ row }) => `$${row.original.feeAmount.toFixed(2)}`
+  },
+  {
+    accessorKey: "dueMonths",
+    header: "Due Months",
+    cell: ({ row }) => {
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const lastPaidDate = row.original.lastPaidDate;
+      const dueMonths = row.original.dueMonths;
+      
+      if (!lastPaidDate) {
+        return 'N/A'; // or any other fallback you prefer
+      }
+      
+      const lastPaid = new Date(lastPaidDate);
+      // Get the month after the last paid month
+      let startMonth = lastPaid.getMonth() + 1; // +1 because we want the next month
+      let startYear = lastPaid.getFullYear();
+      
+      // Handle December to January transition
+      if (startMonth > 11) {
+        startMonth = 0; // January
+        startYear++;
+      }
+      
+      // Get the due months starting from the month after last paid
+      const monthNames = [];
+      for (let i = 0; i < dueMonths; i++) {
+        const monthIndex = (startMonth + i) % 12;
+        const year = startYear + Math.floor((startMonth + i) / 12);
+        monthNames.push(months[monthIndex]);
+        
+        // Only show the year if it's different from current year and not already shown
+        if (year !== startYear) {
+          monthNames[monthNames.length - 1] += ` '${year.toString().slice(-2)}`;
+        }
+      }
+      
+      // Format as "Feb, Mar + 1 more" if more than 2 months
+      if (monthNames.length > 2) {
+        return `${monthNames[0]}, ${monthNames[1]} + ${monthNames.length - 2} more`;
+      }
+      return monthNames.join(", ");
+    }
+  },
+  {
+    accessorKey: "lastPaidDate",
+    header: "Last Paid Date",
+  },
+  {
+    accessorKey: "totalDue",
+    header: "Total Due",
+    cell: ({ row }) => `$${row.original.totalDue.toFixed(2)}`
+  }
 ];
