@@ -48,10 +48,10 @@ export function Students() {
           filterColumn="phone"
           entityType="student"
           showActions={{
-            add: false,
+            add: true,
             view: true,
-            edit: false,
-            remove: false,
+            edit: true,
+            remove: true,
             makePayment: true
           }}
           onRemove={async (id) => {
