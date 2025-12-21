@@ -4,7 +4,6 @@ import { AppSidebar } from "@/components/shared/app-sidebar"
 import { Toaster } from "@/components/ui/toaster"
 import Dashboard from "@/features/dashboard/page"
 import Attendance from "@/features/attendance/page"
-import Payments from "./features/accounts/page"
 import Staffs from "./features/staff/page"
 import Students from "./features/students/page"
 import Teachers from "./features/teachers/page"
@@ -64,7 +63,6 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard />} />
               <Route path="/attendance" element={<Attendance />} />
-              <Route path="/payments-and-fees" element={<Payments />} />
 
               {/* students */}
               <Route path="/students" element={<Students />} />
