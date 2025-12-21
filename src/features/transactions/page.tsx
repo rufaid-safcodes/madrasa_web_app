@@ -3,8 +3,8 @@ import { transactionColumns, transactionData } from "@/lib/data";
 
 export function Transactions() {
   return (
-    <div className="w-full bg-white p-[20px_30px] rounded-[20px]">
-      <div className="mt-4">
+    <div className="w-full">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold">
           Transaction History
         </h1>
@@ -12,7 +12,7 @@ export function Transactions() {
       </div>
 
       {/* create a data table for transactions */}
-      <div className="pt-4">
+      <div className="bg-white max-h-[calc(100vh-260px)] p-[20px_30px] rounded-2xl overflow-auto">
         <DataTable
           columns={transactionColumns}
           data={transactionData}

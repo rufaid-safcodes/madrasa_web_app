@@ -3,16 +3,16 @@ import { columns, teachersData } from "@/lib/data";
 
 export function Teachers() {
   return (
-    <div className="w-full bg-white p-[20px_30px] rounded-[20px]">
-      <div className="mt-4">
+    <div className="w-full">
+      <div className="mb-4">
         <h1 className="text-2xl font-bold">
           Welcome to Madrasa Web App - Teachers Management
         </h1>
         <p className="mt-2">Manage teachers and their departments here...</p>
       </div>
 
-      {/* create a datatable for teachers */}
-      <div className="pt-4">
+      {/* create a data table for teachers */}
+      <div className="bg-white max-h-[calc(100vh-260px)] p-[20px_30px] rounded-2xl overflow-auto">
        <DataTable
           columns={columns}
           data={teachersData}
