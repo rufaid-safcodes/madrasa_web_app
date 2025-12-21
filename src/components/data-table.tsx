@@ -15,6 +15,7 @@ import {
 } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Filter } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -95,6 +96,7 @@ export function DataTable<TData extends { id: string }, TValue>({
     <div className="w-full">
       {/* 🔍 Search Input */}
       <div className="flex items-center py-4 gap-2 sticky top-0 bg-white z-10">
+        
         <Input
           placeholder={`Filter ${filterColumn}...`}
           value={
@@ -105,6 +107,19 @@ export function DataTable<TData extends { id: string }, TValue>({
           }
           className="max-w-sm"
         />
+
+        {/* Filter Button */}
+        <Button
+          variant="outline"
+          size="icon"
+          className="ml-2"
+          onClick={() => {
+            // TODO: Add filter popup logic here
+            console.log('Filter button clicked');
+          }}
+        >
+          <Filter className="h-4 w-4" />
+        </Button>
 
         {/* Columns Filter */}
         <DropdownMenu>
