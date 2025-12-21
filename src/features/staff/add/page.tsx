@@ -1,5 +1,5 @@
 // src/features/teachers/add/page.tsx
-import { StaffForm } from "../StaffForm";
+import { StaffForm } from "../components/StaffForm";
 
 export default function AddStaff() {
   return (

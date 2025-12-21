@@ -1,6 +1,6 @@
 // src/features/teachers/edit/page.tsx
 import { useParams } from 'react-router-dom';
-import { StaffForm } from '../StaffForm';
+import { StaffForm } from '../components/StaffForm';
 
 export default function EditStaff() {
   const { id } = useParams();
