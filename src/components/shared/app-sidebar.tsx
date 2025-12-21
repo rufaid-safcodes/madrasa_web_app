@@ -48,10 +48,10 @@ const items = [
       { name: "Timetable Classes", url: "/classrooms/timetable-classes" },
       { name: "Subjects", url: "/subjects" },
       { name: "Class Modes", url: "/batches" },
-      {
-        name: "Assign Students to Classrooms",
-        url: "/classrooms/assign-students-to-classrooms",
-      }
+      // {
+      //   name: "Assign Students to Classrooms",
+      //   url: "/classrooms/assign-students-to-classrooms",
+      // }
     ],
   },
   {
