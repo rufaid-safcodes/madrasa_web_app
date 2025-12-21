@@ -70,6 +70,7 @@ export function DataTable<TData extends { id: string }, TValue>({
   const [rowSelection, setRowSelection] = React.useState({});
   const navigate = useNavigate();
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data,
     columns,
@@ -93,7 +94,7 @@ export function DataTable<TData extends { id: string }, TValue>({
   return (
     <div className="w-full">
       {/* 🔍 Search Input */}
-      <div className="flex items-center py-4 gap-2">
+      <div className="flex items-center py-4 gap-2 sticky top-0 bg-white z-10">
         <Input
           placeholder={`Filter ${filterColumn}...`}
           value={

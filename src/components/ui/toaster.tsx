@@ -7,7 +7,7 @@ export function Toaster() {
   const { toasts } = useToast()
 
   return (
-    <div className="fixed top-0 z-[100] flex flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col">
+    <div className="fixed top-0 z-[100]! flex flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col">
       <>
       {toasts.map(({ id, title, description, action, ...props }) => {
         return (

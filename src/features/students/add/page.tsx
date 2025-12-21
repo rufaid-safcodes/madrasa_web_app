@@ -2,7 +2,7 @@ import { StudentForm } from "../StudentForm";
 
 export function AddStudents() {
   return (
-    <div className="flex items-center justify-center w-full">
+    <div className="w-full h-[calc(100vh-180px)] overflow-auto">
       <StudentForm mode="ADD" />
     </div>
   );
