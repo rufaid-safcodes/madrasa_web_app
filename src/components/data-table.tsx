@@ -41,11 +41,13 @@ interface DataTableProps<TData, TValue> {
   filterColumn?: string;
   entityType?: "teacher" | "student" | "staff" | "classroom" | "subject" | "batch" | "department" | "feeSetting" | "dueFee" | "transaction";
   onRemove?: (id: string) => Promise<void> | void;
+  onMakePayment?: (id: string) => void;
   showActions?: {
     add?: boolean;
     view?: boolean;
     edit?: boolean;
     remove?: boolean;
+    makePayment?: boolean;
   };
 }
 
@@ -55,11 +57,13 @@ export function DataTable<TData extends { id: string }, TValue>({
   filterColumn = "name",
   entityType = "teacher", // default to 'teacher' for backward compatibility
   onRemove,
+  onMakePayment,
   showActions = {
     add: true,
     view: true,
     edit: true,
-    remove: true
+    remove: true,
+    makePayment: false
   },
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -243,7 +247,7 @@ export function DataTable<TData extends { id: string }, TValue>({
                     ))}
 
                   {/* Actions Cell - Conditionally visible */}
-                  {(showActions.view || showActions.edit || showActions.remove) && (
+                  {(showActions.view || showActions.edit || showActions.remove || showActions.makePayment) && (
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -306,6 +310,17 @@ export function DataTable<TData extends { id: string }, TValue>({
                               }}
                             >
                               Remove {entityType}
+                            </DropdownMenuItem>
+                          )}
+                          {showActions.makePayment !== false && onMakePayment && (
+                            <DropdownMenuItem
+                              className="text-green-600 hover:text-white! hover:bg-green-600!"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onMakePayment(row.original.id);
+                              }}
+                            >
+                              Make Payment
                             </DropdownMenuItem>
                           )}
                         </DropdownMenuContent>
