@@ -49,12 +49,12 @@ function App() {
       <SidebarProvider>
         <AppSidebar />
 
-        <main className="w-full bg-[#f1f1f1]">
+        <main className="w-full bg-[#f1f1f1]" style={{overflow:"hidden"}}>
           {/* <nav className="flex gap-4">
             <Link to="/" className="text-blue-600 hover:underline">Home</Link>
             <Link to="/about" className="text-blue-600 hover:underline">About</Link>
           </nav> */}
-          <div className="sticky top-0 bg-white p-[30px_40px] flex items-center gap-5">
+          <div className="sticky top-0 bg-white p-[30px_40px] flex items-center gap-5 shadow-xl">
 
             <SidebarTrigger />
 
