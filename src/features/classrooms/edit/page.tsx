@@ -1,6 +1,6 @@
 // src/features/teachers/edit/page.tsx
 import { useParams } from 'react-router-dom';
-import { ClassRoomForm } from '../ClassRoomForm';
+import { ClassRoomForm } from '../components/ClassRoomForm';
 
 export default function EditClassRoom() {
   const { id } = useParams();

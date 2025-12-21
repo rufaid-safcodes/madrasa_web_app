@@ -1,4 +1,4 @@
-import { ClassRoomForm } from "../ClassRoomForm";
+import { ClassRoomForm } from "../components/ClassRoomForm";
 
 export default function AddClassRoom() {
   return (
