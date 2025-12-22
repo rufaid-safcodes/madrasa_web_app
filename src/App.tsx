@@ -107,7 +107,7 @@ function AppContent() {
     <SidebarProvider>
       <AppSidebar />
 
-      <main className="w-full bg-[#f1f1f1] h-screen flex flex-col" style={{overflow:"hidden"}}>
+      <main className="w-full bg-[#f1f1f1] min-h-screen flex flex-col" style={{overflow:"hidden"}}>
         {/* <nav className="flex gap-4">
           <Link to="/" className="text-blue-600 hover:underline">Home</Link>
           <Link to="/about" className="text-blue-600 hover:underline">About</Link>
