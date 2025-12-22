@@ -45,7 +45,7 @@ export function Students() {
         <DataTable
           columns={studentColumns}
           data={studentsData}
-          filterColumn="phone"
+          filterColumn="name"
           entityType="student"
           showActions={{
             add: true,
