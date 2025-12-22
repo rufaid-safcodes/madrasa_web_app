@@ -18,6 +18,18 @@ export function Teachers() {
           data={teachersData}
           filterColumn="name"
           entityType="teacher"
+            filterContent={{
+            available: true,
+            data: "Teachers",
+            title: "Filter Teachers by Availability",
+            fieldsList: [
+              { label: "Name", placeholder: "Enter name", type: "input" },
+              { label: "Department", placeholder: "Select department", type: "select", apiEndpoint: "/api/departments" },
+              { label: "Status", placeholder: "Enter status", type: "input" },
+              // { label: "Siblings Id", placeholder: "Enter siblings ID", type: "input" },
+            ],
+            apiEndpoint: "/api/students/filter"
+          }}
           onRemove={async (id) => {
             // TODO: Replace with your actual API call
             console.log("Removing teacher with ID:", id);

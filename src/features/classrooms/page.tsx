@@ -18,6 +18,18 @@ export function ClassRooms() {
           data={classroomData}
           filterColumn="name"
           entityType="classroom"
+            filterContent={{
+            available: true,
+            data: "Classrooms",
+            title: "Filter Classrooms by Availability",
+            fieldsList: [
+              { label: "Division", placeholder: "Enter division", type: "select", apiEndpoint: "/api/divisions" },
+              { label: "Batch", placeholder: "Select batch", type: "select", apiEndpoint: "/api/batches" },
+              // { label: "Admission Number", placeholder: "Enter admission number", type: "input" },
+              { label: "Status", placeholder: "Enter status", type: "input" },
+            ],
+            apiEndpoint: "/api/students/filter"
+          }}
           onRemove={async (id) => {
             // TODO: Replace with your actual API call
             console.log("Removing classroom with ID:", id);
