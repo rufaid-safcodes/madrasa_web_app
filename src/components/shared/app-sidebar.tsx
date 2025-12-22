@@ -159,7 +159,7 @@ export function AppSidebar() {
                         asChild
                         tooltip={state === "collapsed" ? item.title : undefined}
                         isActive={isActive}
-                        className="data-[active=true]:bg-white! data-[active=true]:text-black! hover:bg-white! hover:text-black! text-white!"
+                        className="text-white data-[active=true]:bg-white data-[active=true]:text-black hover:bg-white/10 hover:text-white"
                       >
                         <NavLink
                           to={item.url}
@@ -187,7 +187,7 @@ export function AppSidebar() {
                             <SidebarMenuSubButton
                               asChild
                               isActive={location.pathname === sub.url}
-                              className="data-[active=true]:bg-white! data-[active=true]:text-black! hover:bg-white! hover:text-black! text-white!"
+                              className="text-white data-[active=true]:bg-white data-[active=true]:text-black hover:bg-white/10 hover:text-white"
                             >
                               <NavLink to={sub.url} end>
                                 {sub.name}
