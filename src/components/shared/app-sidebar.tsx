@@ -20,6 +20,10 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubItem,
+  SidebarMenuSubButton,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 // Menu items
@@ -59,7 +63,7 @@ const items = [
     url: "/attendance",
     icon: Search,
     list: [
-      { name: "Take Attendance", url: "/take-attendance" },
+      { name: "Take Attendance", url: "/attendance" },
       { name: "Edit Attendance", url: "/edit-attendance" },
       { name: "Attendance Reports", url: "/attendance-reports" },
     ],
@@ -109,6 +113,7 @@ const items = [
 export function AppSidebar() {
   const location = useLocation();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  const { state } = useSidebar();
 
   // Auto-expand parent menu if child is active
   useEffect(() => {
@@ -131,75 +136,70 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarContent className="bg-[#151529]!">
         <SidebarGroup>
-          <SidebarGroupLabel className="mb-3">
+          <SidebarGroupLabel className="mb-3 group-data-[collapsible=icon]:opacity-0">
             <div>
               <p className="text-white text-[24px]">LOGO</p>
             </div>
           </SidebarGroupLabel>
-          {/* <div>
-            <SidebarTrigger />
-          </div> */}
-          <SidebarGroupContent className="p-3">
-            <SidebarMenu className=" flex flex-col gap-2">
-              {items.map((item) => (
-                <div key={item.title}>
-                  <SidebarMenuItem>
-                    <div className="flex items-center">
-                      <SidebarMenuButton asChild className="flex-1">
+          <SidebarGroupContent className="">
+            <SidebarMenu className="flex flex-col gap-2">
+              {items.map((item) => {
+                const isActive = item.list
+                  ? item.list.some((sub) => sub.url === location.pathname)
+                  : location.pathname === item.url;
+                const isExpanded = expandedItems.includes(item.title);
+
+                return (
+                  <div key={item.title}>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton
+                        asChild
+                        tooltip={state === "collapsed" ? item.title : undefined}
+                        isActive={isActive}
+                        className="data-[active=true]:bg-white! data-[active=true]:text-black! hover:bg-white! hover:text-black! text-white!"
+                      >
                         <NavLink
                           to={item.url}
                           end={!item.list}
-                          // style={{ color: "#fff" }}
-                          className={({ isActive }) =>
-                            `flex items-center gap-2 rounded-md p-3 transition-colors text-sm text-white font-medium ${
-                              isActive && !item.list
-                                ? "bg-white text-black!"
-                                : "text-white! hover:bg-white! hover:text-black!"
-                            }`
-                          }
+                          className="flex items-center gap-2"
                         >
                           <item.icon className="w-5 h-5 shrink-0" />
                           <span className="flex-1 text-left">{item.title}</span>
-                          {item.list && (
+                          {item.list && state === "expanded" && (
                             <ChevronDown
                               onClick={(e) => handleExpand(e, item.title)}
                               className={`w-4 h-4 transition-transform duration-200 ${
-                                expandedItems.includes(item.title)
-                                  ? "rotate-180"
-                                  : ""
+                                isExpanded ? "rotate-180" : ""
                               }`}
                             />
                           )}
                         </NavLink>
                       </SidebarMenuButton>
-                    </div>
-                  </SidebarMenuItem>
+                    </SidebarMenuItem>
 
-                  {item.list && expandedItems.includes(item.title) && (
-                    <div className="ml-8 mt-1 space-y-1">
-                      {item.list.map((sub) => (
-                        <NavLink
-                          key={sub.name}
-                          to={sub.url}
-                          end
-                          className={({ isActive }) =>
-                            `block px-3 py-2 text-sm rounded-md transition-colors ${
-                              isActive
-                                ? "bg-white text-black!"
-                                : "text-white! hover:bg-white! hover:text-black!"
-                            }`
-                          }
-                        >
-                          {sub.name}
-                        </NavLink>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
+                    {item.list && isExpanded && state === "expanded" && (
+                      <SidebarMenuSub>
+                        {item.list.map((sub) => (
+                          <SidebarMenuSubItem key={sub.name}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={location.pathname === sub.url}
+                              className="data-[active=true]:bg-white! data-[active=true]:text-black! hover:bg-white! hover:text-black! text-white!"
+                            >
+                              <NavLink to={sub.url} end>
+                                {sub.name}
+                              </NavLink>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    )}
+                  </div>
+                );
+              })}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
