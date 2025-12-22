@@ -10,7 +10,7 @@ export function Students() {
 
   const handlePaymentSubmit = (months: string[], amount: number, paymentDate: string) => {
     if (!selectedStudent) return;
-    
+
     console.log("Payment details:", {
       studentId: selectedStudent.id,
       studentName: `${selectedStudent.first_name} ${selectedStudent.last_name}`,
@@ -18,15 +18,15 @@ export function Students() {
       totalAmount: amount,
       paymentDate,
     });
-    
+
     // In a real app, you would make an API call here to record the payment
     // await recordPayments(selectedStudent.id, { months, amount, paymentDate });
-    
+
     // Update the local state to reflect the payments
     // This is just a temporary solution - in a real app, you would refetch the data
     const updatedFeesDue = selectedStudent.fees_due?.filter(m => !months.includes(m)) || [];
     console.log(`Updated fees due for student ${selectedStudent.id}:`, updatedFeesDue);
-    
+
     // Show single success message for all months
     const monthList = months.map(m => m.charAt(0).toUpperCase() + m.slice(1)).join(', ');
     alert(`Successfully recorded payment of ${amount} AED for ${monthList}`);
@@ -54,6 +54,18 @@ export function Students() {
             remove: true,
             makePayment: true
           }}
+          filterContent={{
+            available: true,
+            data: "Students",
+            title: "Filter Students by Availability",
+            fieldsList: [
+              { label: "Name", placeholder: "Enter name", type: "input" },
+              { label: "Class", placeholder: "Select class", type: "select", apiEndpoint: "/api/classes" },
+              { label: "Admission Number", placeholder: "Enter admission number", type: "input" },
+              { label: "Siblings Id", placeholder: "Enter siblings ID", type: "input" },
+            ],
+            apiEndpoint: "/api/students/filter"
+          }}
           onRemove={async (id) => {
             // TODO: Replace with your actual API call
             console.log("Removing student with ID:", id);
@@ -71,16 +83,18 @@ export function Students() {
           }}
         />
       </div>
-      
-      {selectedStudent && (
-        <PaymentModal
-          isOpen={isPaymentModalOpen}
-          onClose={() => setIsPaymentModalOpen(false)}
-          student={selectedStudent}
-          onPaymentSubmit={handlePaymentSubmit}
-        />
-      )}
-    </div>
+
+      {
+        selectedStudent && (
+          <PaymentModal
+            isOpen={isPaymentModalOpen}
+            onClose={() => setIsPaymentModalOpen(false)}
+            student={selectedStudent}
+            onPaymentSubmit={handlePaymentSubmit}
+          />
+        )
+      }
+    </div >
   );
 }
 

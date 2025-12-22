@@ -1,4 +1,4 @@
-import { StudentForm } from "../StudentForm";
+import { StudentForm } from "../components/StudentForm";
 
 export function AddStudents() {
   return (

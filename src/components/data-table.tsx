@@ -34,6 +34,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -48,6 +49,13 @@ interface DataTableProps<TData, TValue> {
     edit?: boolean;
     remove?: boolean;
     makePayment?: boolean;
+  };
+  filterContent?: {
+    available: boolean;
+    data: string;
+    title: string;
+    fieldsList: { label: string; placeholder: string; type: string, apiEndpoint?: string }[];
+    apiEndpoint: string;
   };
 }
 
@@ -65,6 +73,7 @@ export function DataTable<TData extends { id: string }, TValue>({
     remove: true,
     makePayment: false
   },
+  filterContent,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -73,6 +82,7 @@ export function DataTable<TData extends { id: string }, TValue>({
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [isFilterDialogOpen, setIsFilterDialogOpen] = React.useState(false);
   const navigate = useNavigate();
 
   // eslint-disable-next-line react-hooks/incompatible-library
@@ -100,7 +110,7 @@ export function DataTable<TData extends { id: string }, TValue>({
     <div className="w-full">
       {/* 🔍 Search Input */}
       <div className="flex items-center py-4 gap-2 sticky top-0 bg-white z-10">
-        
+
         <Input
           placeholder={`Filter ${filterColumn}...`}
           value={
@@ -113,17 +123,51 @@ export function DataTable<TData extends { id: string }, TValue>({
         />
 
         {/* Filter Button */}
-        <Button
-          variant="outline"
-          size="icon"
-          className="ml-2"
-          onClick={() => {
-            // TODO: Add filter popup logic here
-            console.log('Filter button clicked');
-          }}
-        >
-          <Filter className="h-4 w-4" />
-        </Button>
+        {filterContent?.available ? <Dialog open={isFilterDialogOpen} onOpenChange={setIsFilterDialogOpen}>
+          <DialogTrigger className="cursor-pointer bg-[#151529]! hover:bg-gray-200! p-2.5 text-white hover:text-[#2a2a2a] rounded-md"> <Filter className="h-4 w-4" /></DialogTrigger>
+          <DialogContent className="max-w-[600px]!">
+            <DialogHeader>
+              <DialogTitle className="text-[26px]">{filterContent.data} Filter</DialogTitle>
+            </DialogHeader>
+            <div>
+              <div className="grid grid-cols-12 gap-5">
+                {filterContent.fieldsList.map((field, index) => (
+                  <div key={index} className="col-span-6 max-md:col-span-full">
+
+                    <label className="block mb-1 font-medium">{field.label}</label>
+                    {field.type === "input" ? (
+                      <Input className="h-10" placeholder={field.placeholder} />
+                    ) : field.type === "select" ? (
+                      <div className="px-2! border border-gray-300 rounded-md h-[40px]">
+                        <select className="w-full bg-transparent! outline-none! py-auto! px-0! h-[40px]">
+                          <option value="">{field.placeholder}</option>
+                          {/* Add options here */}
+                        </select>
+                      </div>
+                    ) : null}
+                  </div>
+                ))}
+
+              </div>
+              <div className="flex justify-end gap-2 mt-2">
+                <Button
+                  variant="outline"
+                  onClick={() => setIsFilterDialogOpen(false)}
+                  className="mt-4 cursor-pointer"
+                >
+                  Close
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setIsFilterDialogOpen(false)}
+                  className="mt-4 bg-[#151529] hover:bg-black text-white! cursor-pointer"
+                >
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog> : null}
 
         {/* Columns Filter */}
         <DropdownMenu>
@@ -155,8 +199,7 @@ export function DataTable<TData extends { id: string }, TValue>({
             className="capitalize bg-[#151529] text-white cursor-pointer"
             onClick={() =>
               navigate(
-                `/${
-                  entityType === "classroom" ? "classrooms" : `${entityType}s`
+                `/${entityType === "classroom" ? "classrooms" : `${entityType}s`
                 }/add-${entityType}${entityType === "classroom" ? "" : "s"}`
               )
             }
@@ -261,12 +304,10 @@ export function DataTable<TData extends { id: string }, TValue>({
                             <DropdownMenuItem
                               onClick={() =>
                                 navigate(
-                                  `/${
-                                    entityType === "classroom"
-                                      ? "classrooms"
-                                      : `${entityType}s`
-                                  }/view-${entityType}${
-                                    entityType === "classroom" ? "" : "s"
+                                  `/${entityType === "classroom"
+                                    ? "classrooms"
+                                    : `${entityType}s`
+                                  }/view-${entityType}${entityType === "classroom" ? "" : "s"
                                   }/${row.original.id}`
                                 )
                               }
@@ -278,12 +319,10 @@ export function DataTable<TData extends { id: string }, TValue>({
                             <DropdownMenuItem
                               onClick={() =>
                                 navigate(
-                                  `/${
-                                    entityType === "classroom"
-                                      ? "classrooms"
-                                      : `${entityType}s`
-                                  }/edit-${entityType}${
-                                    entityType === "classroom" ? "" : "s"
+                                  `/${entityType === "classroom"
+                                    ? "classrooms"
+                                    : `${entityType}s`
+                                  }/edit-${entityType}${entityType === "classroom" ? "" : "s"
                                   }/${row.original.id}`
                                 )
                               }
