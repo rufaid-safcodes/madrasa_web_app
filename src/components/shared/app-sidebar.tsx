@@ -89,7 +89,7 @@ const items = [
   },
   {
     title: "Accounts and Fees",
-    url: "/accounts",
+    url: "/due-fees",
     icon: CreditCard,
     list: [
       { name: "Due Fees", url: "/due-fees" },
