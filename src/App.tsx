@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/shared/app-sidebar"
 import { Toaster } from "@/components/ui/toaster"
@@ -42,23 +42,82 @@ import Transactions from "./features/transactions/page"
 import ViewTransaction from "./features/transactions/view/page"
 import ViewDueFees from "./features/dueFees/view/page"
 
-function App() {
+// Helper function to get page title based on route
+const getTitleFromRoute = (pathname: string): string => {
+  const titleMap: Record<string, string> = {
+    "/": "Dashboard",
+    "/attendance": "Attendance",
+    "/students": "Students",
+    "/students/add-students": "Add Student",
+    "/students/edit-students": "Edit Student",
+    "/students/view-students": "View Student",
+    "/students/students-bulk-upload": "Bulk Upload Students",
+    "/subjects": "Subjects",
+    "/subjects/add-subjects": "Add Subject",
+    "/subjects/edit-subjects": "Edit Subject",
+    "/subjects/view-subjects": "View Subject",
+    "/batches": "Batches",
+    "/batchs/add-batchs": "Add Batch",
+    "/batchs/edit-batchs": "Edit Batch",
+    "/batchs/view-batchs": "View Batch",
+    "/classrooms": "Classrooms",
+    "/classrooms/add-classroom": "Add Classroom",
+    "/classrooms/edit-classroom": "Edit Classroom",
+    "/classrooms/view-classroom": "View Classroom",
+    "/teachers": "Teachers",
+    "/teachers/add-teachers": "Add Teacher",
+    "/teachers/edit-teachers": "Edit Teacher",
+    "/teachers/view-teachers": "View Teacher",
+    "/departments": "Departments",
+    "/departments/add-departments": "Add Department",
+    "/departments/edit-departments": "Edit Department",
+    "/departments/view-departments": "View Department",
+    "/staffs/accounts": "Accounts Staff",
+    "/staffs/add-staffs": "Add Staff",
+    "/staffs/edit-staffs": "Edit Staff",
+    "/staffs/view-staffs": "View Staff",
+    "/transactions": "Transactions",
+    "/transactions/view-transactions": "View Transaction",
+    "/due-fees": "Due Fees",
+    "/dueFees/view-dueFees": "View Due Fees",
+    "/fee-settings": "Fee Settings",
+    "/feeSettings/add-feeSettings": "Add Fee Setting",
+    "/feeSettings/edit-feeSettings": "Edit Fee Setting",
+    "/feeSettings/view-feeSettings": "View Fee Setting",
+  };
+
+  // Check for exact match first
+  if (titleMap[pathname]) {
+    return titleMap[pathname];
+  }
+
+  // Check for partial matches (for dynamic routes with IDs)
+  const pathWithoutId = pathname.replace(/\/[a-zA-Z0-9-]+$/, "");
+  if (titleMap[pathWithoutId]) {
+    return titleMap[pathWithoutId];
+  }
+
+  return "Dashboard";
+};
+
+function AppContent() {
+  const location = useLocation();
+  const title = getTitleFromRoute(location.pathname);
   return (
-    <BrowserRouter>
-      <SidebarProvider>
-        <AppSidebar />
+    <SidebarProvider>
+      <AppSidebar />
 
-        <main className="w-full bg-[#f1f1f1]" style={{overflow:"hidden"}}>
-          {/* <nav className="flex gap-4">
-            <Link to="/" className="text-blue-600 hover:underline">Home</Link>
-            <Link to="/about" className="text-blue-600 hover:underline">About</Link>
-          </nav> */}
-          <div className="sticky top-0 bg-white p-[30px_40px] flex items-center gap-5 shadow-xl">
+      <main className="w-full bg-[#f1f1f1] h-screen flex flex-col" style={{overflow:"hidden"}}>
+        {/* <nav className="flex gap-4">
+          <Link to="/" className="text-blue-600 hover:underline">Home</Link>
+          <Link to="/about" className="text-blue-600 hover:underline">About</Link>
+        </nav> */}
+        <div className="sticky top-0 bg-white p-[30px_40px] flex items-center gap-5 shadow-xl z-50">
 
-            <SidebarTrigger />
+          <SidebarTrigger />
 
-            <h1 className="text-[26px] font-medium">Title</h1>
-          </div>
+          <h1 className="text-[26px] font-medium">{title}</h1>
+        </div>
           <div className="p-10!">
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -124,8 +183,15 @@ function App() {
         </main>
         <Toaster />
       </SidebarProvider>
+    );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
-  )
+  );
 }
 
 export default App
