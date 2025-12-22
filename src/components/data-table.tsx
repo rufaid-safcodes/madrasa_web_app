@@ -138,8 +138,8 @@ export function DataTable<TData extends { id: string }, TValue>({
                     {field.type === "input" ? (
                       <Input className="h-10" placeholder={field.placeholder} />
                     ) : field.type === "select" ? (
-                      <div className="px-2! border border-gray-300 rounded-md h-[40px]">
-                        <select className="w-full bg-transparent! outline-none! py-auto! px-0! h-[40px]">
+                      <div className="px-2! border border-gray-300 rounded-md h-10">
+                        <select className="w-full bg-transparent! outline-none! py-auto! px-0! h-10">
                           <option value="">{field.placeholder}</option>
                           {/* Add options here */}
                         </select>
