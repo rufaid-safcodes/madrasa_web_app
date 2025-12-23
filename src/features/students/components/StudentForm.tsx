@@ -185,7 +185,7 @@ export function StudentForm({ mode, studentId }: StudentFormProps) {
   return (
     // <div className="" style={{overflow:"hidden"}}>
 
-    <Card className="min-w-[calc(100vw-1000px)] max-h-[calc(100vh-200px)] overflow-auto">
+    <Card className="min-w-[calc(100vw-1000px)]">
       <CardHeader>
         <CardTitle>
           {mode === "ADD"
